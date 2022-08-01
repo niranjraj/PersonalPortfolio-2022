@@ -1,0 +1,65 @@
+@use "../base/functions.scss" as *;
+.noise::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 150;
+    opacity: 0.03;
+    pointer-events: none;
+    background: url("/static/noise.gif");
+}
+
+.greeter-container {
+    width: 100%;
+    background-color: #E0D8CD;
+    color: #231F20;
+    position: relative;
+}
+
+.greeter {
+    padding-top: 35vh;
+    margin: 0 auto;
+    width: calc(100% - 300px);
+    padding-bottom: 7em;
+}
+
+.greeter-title {
+    font-family: IvyMode;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13.5vh;
+    width: 85%;
+    & .row {
+        line-height: 1;
+        overflow: hidden;
+        & span {
+            display: inline-block;
+            white-space: nowrap;
+        }
+    }
+}
+
+.nav-title {
+    position: absolute;
+    top: 0;
+    right: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & li {
+        margin-right: 3em;
+        font-family: WorkSansLight;
+        cursor: pointer;
+        font-size: 1.6rem;
+    }
+}
+
+.nav-title a {
+    color: #231F20;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+}

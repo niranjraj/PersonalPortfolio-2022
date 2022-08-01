@@ -1,0 +1,43 @@
+.loader-container {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #231F20;
+    color: #E0D8CD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: IvyMode;
+    font-weight: 300;
+    pointer-events: none;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    font-size: 6.9rem;
+    align-items: center;
+}
+
+.title-year {
+    font-size: 6.9rem;
+    margin-bottom: 0.2em;
+    position: relative;
+    &::before {
+        position: absolute;
+        background-color: #E0D8CD;
+        content: "";
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+    }
+}
+
+.subtitle-loader {
+    font-size: 2.8rem;
+    font-weight: 300;
+}
