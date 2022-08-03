@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 
 //variants
 const banner = {
@@ -40,7 +42,16 @@ const appear = {
 };
 
 const Greeter = () => {
-  useEffect(() => {}, []);
+  const dispatch = useAppDispatch();
+
+  const projectEnter = () => {
+    dispatch(setCursorText("Take Me"));
+    dispatch(setCursorVariant("take"));
+  };
+  const leave = () => {
+    dispatch(setCursorText(""));
+    dispatch(setCursorVariant("default"));
+  };
   return (
     <motion.section
       variants={banner}
@@ -52,37 +63,43 @@ const Greeter = () => {
       <ul className="nav-title">
         <motion.li variants={appear} animate="animate" initial="initial">
           <Link href="/">
-            <a>Home.</a>
+            <a onMouseEnter={projectEnter} onMouseLeave={leave}>
+              Home.
+            </a>
           </Link>
         </motion.li>
         <motion.li variants={appear} animate="animate" initial="initial">
           <Link href="/">
-            <a>About.</a>
+            <a onMouseEnter={projectEnter} onMouseLeave={leave}>
+              About.
+            </a>
           </Link>
         </motion.li>
-        <motion.li variants={appear} animate="animate" initial="initial">
+
+        <motion.li
+          className="mobile-nav"
+          variants={appear}
+          animate="animate"
+          initial="initial"
+        >
           <Link href="/">
-            <a>Contact.</a>
+            <a onMouseEnter={projectEnter} onMouseLeave={leave}>
+              Contact.
+            </a>
           </Link>
         </motion.li>
       </ul>
+
       <div className="greeter">
-        <div className="greeter-subtitle"></div>
         <h1 className="greeter-title">
           <span className="row">
             <Letter title="Websites & web" />
           </span>
           <span className="row">
-            <Letter title="apps that merge art" />
+            <Letter title="apps that cater" />
           </span>
           <span className="row">
-            <Letter title="direction, digitial interactions and" />
-          </span>
-          <span className="row">
-            <Letter title="and creative startegy." />
-          </span>
-          <span className="row">
-            <Letter title="Providing an interactive digital experience." />
+            <Letter title="an interactive and appealing digital experience." />
           </span>
         </h1>
       </div>

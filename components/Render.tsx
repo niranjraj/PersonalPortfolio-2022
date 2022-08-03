@@ -21,7 +21,7 @@ const Render = (props: Props) => {
         position={props.position ? props.position : [5, -4, 20]}
       />
       {props.control ? (
-        <TrackballControls />
+        <TrackballControls noZoom={true} noPan={true} rotateSpeed={0.8} />
       ) : (
         <OrbitControls
           enableZoom={false}

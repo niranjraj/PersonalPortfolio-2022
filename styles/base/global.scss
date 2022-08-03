@@ -5,6 +5,13 @@ html {
     // scrollbar-width: thin;
 }
 
+// html,
+// body {
+//     &,
+//     * {
+//         cursor: none;
+//     }
+// }
 // html::-webkit-scrollbar {
 //     width: 5px;
 // }
@@ -24,6 +31,7 @@ body {
     -ms-user-select: none;
     /* IE 10 and IE 11 */
     user-select: none;
+    overflow: hidden;
 }
 
 *,
@@ -52,15 +60,6 @@ li {
 .row {
     font-family: inherit;
     display: block;
-}
-
-.section-header-title {
-    font-size: 14.5vh;
-    font-family: IvyMode;
-    font-weight: 300;
-    color: #E0D8CD;
-    overflow: hidden;
-    margin-bottom: 1em;
 }
 
 .row-letter-ani {

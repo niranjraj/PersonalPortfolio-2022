@@ -24,6 +24,14 @@
     margin: 0 auto;
     width: calc(100% - 300px);
     padding-bottom: 7em;
+    @include tablet-landscape-and-below {
+        width: calc(100% - 100px);
+        padding-top: 20vh;
+    }
+    @include mobile-landscape-and-below {
+        padding-bottom: 7em;
+        padding-top: 7em;
+    }
 }
 
 .greeter-title {
@@ -31,7 +39,24 @@
     font-weight: 400;
     font-style: normal;
     font-size: 13.5vh;
-    width: 85%;
+    width: 82%;
+    line-height: 1;
+    @include tablet-only {
+        font-size: 12vw;
+        width: 100%;
+    }
+    @include tablet-portrait-only {
+        font-size: 11vw;
+        width: 100%;
+    }
+    @include mobile-landscape-and-below {
+        font-size: 2.5rem;
+        width: 100%;
+        line-height: 1.6;
+    }
+    @include mobile-only {
+        font-size: 2.2rem;
+    }
     & .row {
         line-height: 1;
         overflow: hidden;
@@ -42,6 +67,14 @@
     }
 }
 
+.greeter-subtitle {
+    padding: 2em 0 2em 5em;
+    font-family: IvyMode;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6.7vh;
+}
+
 .nav-title {
     position: absolute;
     top: 0;
@@ -50,11 +83,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include tablet-portrait-only {
+        right: 0;
+    }
+    @include mobile-landscape-and-below {
+        right: 0;
+    }
+    @include mobile-only {
+        height: 100px;
+    }
     & li {
         margin-right: 3em;
         font-family: WorkSansLight;
-        cursor: pointer;
         font-size: 1.6rem;
+        @include mobile-landscape-and-below {
+            font-size: 1.2rem;
+        }
     }
 }
 

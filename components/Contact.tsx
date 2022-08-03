@@ -3,6 +3,10 @@ import Link from "next/link";
 import SvgComponent from "./SvgComponent";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
+
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
+
 const banner = {
   animate: {
     transition: {
@@ -42,9 +46,21 @@ const mailInfo = {
   subject: "Project or Enquiry",
 };
 const Contact = () => {
-  function activate() {
-    console.log("hey there");
-  }
+  const dispatch = useAppDispatch();
+
+  const buttonEnter = () => {
+    dispatch(setCursorText("👋"));
+    dispatch(setCursorVariant("contact"));
+  };
+  const leave = () => {
+    dispatch(setCursorText(""));
+    dispatch(setCursorVariant("default"));
+  };
+  const emailEnter = () => {
+    dispatch(setCursorText("📧"));
+    dispatch(setCursorVariant("mail"));
+  };
+
   return (
     <section className="contact-container" data-scroll-section>
       <div className="contact-footer-section">
@@ -89,23 +105,29 @@ const Contact = () => {
             >
               <li className="row-letter-ani">
                 <Link href="https://github.com/niranjraj">
-                  <motion.a className="letter-ani" variants={letterAni}>
-                    Github
-                  </motion.a>
+                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
+                    <motion.span className="letter-ani" variants={letterAni}>
+                      Github
+                    </motion.span>
+                  </a>
                 </Link>
               </li>
               <li className="row-letter-ani">
                 <Link href="">
-                  <motion.a className="letter-ani" variants={letterAni}>
-                    LinkedIn
-                  </motion.a>
+                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
+                    <motion.span className="letter-ani" variants={letterAni}>
+                      LinkedIn
+                    </motion.span>
+                  </a>
                 </Link>
               </li>
               <li className="row-letter-ani">
                 <Link href="">
-                  <motion.a className="letter-ani" variants={letterAni}>
-                    Instagram
-                  </motion.a>
+                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
+                    <motion.span className="letter-ani" variants={letterAni}>
+                      Instagram
+                    </motion.span>
+                  </a>
                 </Link>
               </li>
             </motion.ul>
@@ -127,10 +149,14 @@ const Contact = () => {
 
             <div>
               <Link href={`mailto:${mailInfo.id}?subject=${mailInfo.subject}`}>
-                <a className="btn-connect">
+                <a
+                  className="btn-connect"
+                  onMouseEnter={emailEnter}
+                  onMouseLeave={leave}
+                >
                   <span>Connect</span>
                   <span>
-                    <SvgComponent />
+                    <SvgComponent width={40} height={40} />
                   </span>
                 </a>
               </Link>
@@ -155,4 +181,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default React.memo(Contact);

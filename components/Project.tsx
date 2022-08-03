@@ -2,19 +2,22 @@ import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
+
 import proj1 from "../public/static/invoicelyPhone.png";
 import proj2 from "../public/static/supplyco4.png";
 import proj3 from "../public/static/machinelearning.png";
 import proj5 from "../public/static/arch1.png";
 import proj4 from "../public/static/itiha.png";
 import Link from "next/link";
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 
 type projectItem = {
   image: StaticImageData;
   title: string;
   subtitle: string;
   type: string;
-  speed: number;
+  speed: string;
   width: string;
   height: string;
   link: string;
@@ -47,7 +50,7 @@ const projectItems: projectItem[] = [
     title: "Invoicely",
     subtitle: "a professional web app for Invoices",
     type: "logic, implementation, webapp, ux",
-    speed: 3,
+    speed: "-2",
     width: "600",
     height: "812",
     link: "https://github.com/niranjraj/invoice-app",
@@ -57,7 +60,7 @@ const projectItems: projectItem[] = [
     title: "SupplycoKerala",
     subtitle: "an online platform for government supply",
     type: "design, logic, implementation, website, ui/ux",
-    speed: 3,
+    speed: "-2",
     width: "600",
     height: "600",
     link: "https://github.com/niranjraj/invoice-app",
@@ -67,7 +70,7 @@ const projectItems: projectItem[] = [
     title: "Diabetes Prediction",
     subtitle: "diagnosis of diabetes through machine learning",
     type: "logic, implementation, report",
-    speed: 3,
+    speed: "-2",
     width: "800",
     height: "800",
     link: "https://github.com/niranjraj/invoice-app",
@@ -77,9 +80,9 @@ const projectItems: projectItem[] = [
     title: "Itiha",
     subtitle: "configuration of arch.",
     type: "logic, implementation, website",
-    speed: 3,
-    width: "600",
-    height: "600",
+    speed: "-2",
+    width: "800",
+    height: "800",
     link: "https://github.com/niranjraj/invoice-app",
   },
   {
@@ -87,7 +90,7 @@ const projectItems: projectItem[] = [
     title: "Arch",
     subtitle: "configuration of arch.",
     type: "design, experiment, config",
-    speed: 3,
+    speed: "-2",
     width: "800",
     height: "800",
     link: "https://github.com/niranjraj/invoice-app",
@@ -95,6 +98,16 @@ const projectItems: projectItem[] = [
 ];
 
 const Project = () => {
+  const dispatch = useAppDispatch();
+
+  const projectEnter = () => {
+    dispatch(setCursorText("View"));
+    dispatch(setCursorVariant("project"));
+  };
+  const leave = () => {
+    dispatch(setCursorText(""));
+    dispatch(setCursorVariant("default"));
+  };
   return (
     <section className="project-container" data-scroll-section>
       <div className="projects">
@@ -145,27 +158,34 @@ const Project = () => {
                   className="hide-container"
                 ></motion.div>
                 <Link href={project.link}>
-                  <a className="project-item-container">
-                    <div className="project-title">
-                      {`0${index + 1}. `}
-                      {project.title}
-                    </div>
+                  <a
+                    className="project-item-container"
+                    onMouseEnter={projectEnter}
+                    onMouseLeave={leave}
+                  >
                     <div className="project-item-img-wrapper">
                       <div className={`item-img item-img${index}`}>
                         <Image
                           className="proj-img"
                           data-scroll="true"
-                          data-scroll-speed="0.9"
+                          data-scroll-speed={project.speed}
                           data-scroll-offset="-1"
                           src={project.image}
                           height={project.height}
                           width={project.width}
                         />
                       </div>
-                      <div className="project-type">{project.type}</div>
                     </div>
                   </a>
                 </Link>
+
+                <div className="project-title-wrapper">
+                  <div className="project-title">
+                    {`0${index + 1}. `}
+                    {project.title}
+                  </div>
+                  <div className="project-type">{project.type}</div>
+                </div>
               </li>
             );
           })}

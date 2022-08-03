@@ -10,6 +10,8 @@ import Headphone from "./Headphone";
 import SkillItem from "./SkillItem";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 
 //variants
 const banner = {
@@ -80,6 +82,16 @@ const myHobby = [
 
 const Intro = () => {
   const [hobby, setHobby] = useState<Hobby>(myHobby[0]);
+  const dispatch = useAppDispatch();
+
+  const buttonEnter = () => {
+    dispatch(setCursorText("View"));
+    dispatch(setCursorVariant("click"));
+  };
+  const leave = () => {
+    dispatch(setCursorText(""));
+    dispatch(setCursorVariant("default"));
+  };
 
   return (
     <section className="intro-container" data-scroll-section>
@@ -119,7 +131,7 @@ const Intro = () => {
             viewport={{ once: true }}
             initial="initial"
           >
-            <span className="row">
+            <span className="row top-row">
               <span className="bold"> {`Hi,I'm Niranj Rajesh`} </span>a
               passionate creative frontend developer! I love to create new and
               awesome features, Optimized to perform across all devices and
@@ -139,13 +151,18 @@ const Intro = () => {
             </span>
           </motion.p>
           <div className="intro-image">
-            <Image src="/static/beachfront.jpeg" height="650" width="500" />
+            <Image
+              src="/static/beachfront.jpeg"
+              className="intro-img-content"
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         </div>
       </div>
       <div className="character-section about-section-start">
         <h2 className="about-section-title">
-          <SvgComponent />
+          <SvgComponent width={40} height={40} />
           <motion.span
             className="about-section-title-content"
             variants={banner}
@@ -181,19 +198,10 @@ const Intro = () => {
               viewport={{ once: true }}
               initial="initial"
             >
-              <span className="row">
-                About myself you ask? I am a pretty chill person (I guess?)
-              </span>
-
-              <span className="row">
-                {`I usually work alone, but I'm down for collabs. Something that`}
-              </span>
-              <span className="row">
-                drives me is learning new technology. I love the web, spend most
-              </span>
-              <span className="row">
-                {`of my time on it. I'm highly motivated to grow as a developer.`}
-              </span>
+              About myself you ask? I am a pretty chill person (I guess?)
+              {` I usually work alone, but I'm down for collabs. Something that`}
+              drives me is learning new technology. I love the web, spend most
+              {` of my time on it. I'm highly motivated to grow as a developer.`}
             </motion.p>
           </div>
         </div>
@@ -201,7 +209,7 @@ const Intro = () => {
 
       <div className="hobbies-section about-section-start">
         <h2 className="about-section-title">
-          <SvgComponent />
+          <SvgComponent width={40} height={40} />
           <motion.span
             className="about-section-title-content"
             variants={banner}
@@ -216,30 +224,48 @@ const Intro = () => {
         </h2>
         <div className="section-content-space">
           <div className="button-section">
-            <button
+            <motion.button
+              variants={appear}
+              whileInView="animate"
+              viewport={{ once: true }}
+              initial="initial"
+              onMouseEnter={hobby.state !== 0 ? buttonEnter : leave}
+              onMouseLeave={leave}
               style={{ color: hobby.state === 0 ? "#E0D8CD" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[0]);
               }}
             >
               Football
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              variants={appear}
+              whileInView="animate"
+              onMouseEnter={hobby.state !== 1 ? buttonEnter : leave}
+              onMouseLeave={leave}
+              viewport={{ once: true }}
+              initial="initial"
               style={{ color: hobby.state === 1 ? "#E0D8CD" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[1]);
               }}
             >
               Games
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              variants={appear}
+              whileInView="animate"
+              onMouseEnter={hobby.state !== 2 ? buttonEnter : leave}
+              onMouseLeave={leave}
+              viewport={{ once: true }}
+              initial="initial"
               style={{ color: hobby.state === 2 ? "#E0D8CD" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[2]);
               }}
             >
               Music
-            </button>
+            </motion.button>
           </div>
           <AnimatePresence>
             <motion.div
@@ -255,7 +281,14 @@ const Intro = () => {
                 <p>{hobby.des}</p>
               </div>
 
-              <div className="render">
+              <div
+                className="render"
+                onMouseEnter={() => {
+                  dispatch(setCursorText("Drag Me"));
+                  dispatch(setCursorVariant("drag"));
+                }}
+                onMouseLeave={leave}
+              >
                 {hobby.state === 0 ? (
                   <Render control={false} position={[10, 0, 18]}>
                     <Football scale={0.1} />
@@ -276,7 +309,7 @@ const Intro = () => {
       </div>
       <div className="skills-section ">
         <h2 className="about-section-title skills-space">
-          <SvgComponent />
+          <SvgComponent width={40} height={40} />
           <motion.span
             className="about-section-title-content"
             variants={banner}

@@ -1,0 +1,30 @@
+.circle {
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    flex-flow: row;
+    align-content: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #111111;
+    border-radius: 200px;
+    pointer-events: none;
+    color: #fff;
+    text-align: center;
+    font-family: workSans;
+    transform: translate(-50%, -50%);
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+.cursorText {
+    flex: auto;
+    font-size: inherit;
+    pointer-events: none;
+    margin: auto;
+}

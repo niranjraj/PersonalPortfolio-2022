@@ -7,7 +7,7 @@ type Props = {
 
 const letterAni = {
   initial: {
-    y: 300,
+    y: 400,
   },
   animate: {
     y: 0,
