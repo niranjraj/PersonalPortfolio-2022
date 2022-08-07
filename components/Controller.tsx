@@ -84,4 +84,4 @@ export default function Controller(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/controller.gltf");
+useGLTF.preload("/controller.glb");

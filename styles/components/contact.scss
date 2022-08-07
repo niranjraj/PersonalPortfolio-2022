@@ -1,7 +1,9 @@
 @use "../base/functions.scss" as *;
+// @use "../base/variables.scss" as *;
 .contact-container {
-    background-color: #231F20;
-    color: #E0D8CD;
+    background-color: var(--theme-primary);
+    color: var(--theme-text);
+    transition: background 0.5s ease, color 0.8s ease;
 }
 
 .contact-footer-section {
@@ -86,7 +88,7 @@
             bottom: 0;
             width: 100%;
             height: 2px;
-            background-color: #E5D8C7;
+            background-color: var(--theme-secondary);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform .8s cubic-bezier(.19, 1, .22, 1), -webkit-transform .8s cubic-bezier(.19, 1, .22, 1);
@@ -129,7 +131,7 @@
     font-size: 1.6rem;
     padding: 15px 0;
     margin-bottom: 2em;
-    box-shadow: inset 0 0 #E5D8C7;
+    box-shadow: inset 0 0 var(--theme-secondary);
     transition: all .6s;
     @include tablet-portrait-and-below {
         width: 50%;
@@ -145,12 +147,12 @@
         transition: all .6s;
     }
     &:hover {
-        box-shadow: 0 -150px 0 0 #E5D8C7 inset;
-        color: #111111;
+        box-shadow: 0 -150px 0 0 var(--theme-secondary) inset;
+        color: var(--theme-primary);
         padding: 15px 1.3em;
     }
     &:hover path {
-        fill: #111111;
+        fill: var(--theme-primary);
     }
 }
 

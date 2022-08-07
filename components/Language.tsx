@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // })
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 import Counter from "./Counter";
+
+gsap.registerPlugin(ScrollTrigger);
 const letterAni = {
   initial: {
     y: 300,
@@ -27,14 +31,20 @@ const banner = {
 
 const Language = () => {
   const [progressbar, setProgressbar] = useState(false);
-  const { scroll } = useLocomotiveScroll();
+  const animateCounterRef = useRef<HTMLDivElement | null>(null);
 
-  if (scroll !== null) {
-    scroll.on("call", () => {
-      setProgressbar(true);
-    });
-    scroll.off("call");
-  }
+  const { scroll } = useLocomotiveScroll();
+  useEffect(() => {
+    if (scroll !== null) {
+      scroll.on("call", (obj) => {
+        if ((obj as string) === "animateCounter") {
+          setProgressbar(true);
+          console.log("language");
+        }
+      });
+    }
+  }, [scroll]);
+
   return (
     <div className="about-lang">
       <motion.h2

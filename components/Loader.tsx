@@ -1,9 +1,51 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-const Loader = () => {
+type Props = {
+  load?: boolean;
+  setLoading?: Dispatch<SetStateAction<boolean>>;
+};
+const Loader = (props: Props) => {
+  const loaderRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let id: NodeJS.Timer;
+    let initial = 1999;
+    const currentLoad = loaderRef.current as HTMLDivElement;
+    const year = new Date().getFullYear();
+
+    function loading() {
+      id = setInterval(frame, 200);
+    }
+
+    function frame() {
+      if (initial >= year) {
+        clearInterval(id);
+        if (props.setLoading) {
+          props.setLoading(false);
+        }
+
+        console.log("false");
+      } else {
+        initial++;
+        currentLoad.innerHTML = `${initial}`;
+      }
+    }
+    if (props.load) {
+      loading();
+    }
+  }, []);
   return (
     <div className="loader-container">
-      <div className="title-year">1999</div>
+      <div className="title-year" ref={loaderRef}>
+        1999
+      </div>
+      <div className="loader-bar"></div>
       <div className="subtitle-loader">was born</div>
     </div>
   );

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import Image from "next/image";
 import SvgComponent from "./SvgComponent";
 
 import Language from "./Language";
 import Render from "./Render";
-import Football from "./Football";
-import Controller from "./Controller";
-import Headphone from "./Headphone";
-import SkillItem from "./SkillItem";
 
+import SkillItem from "./SkillItem";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { AnimatePresence, motion } from "framer-motion";
-import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import {
+  setCursorText,
+  setCursorVariant,
+  setTheme,
+} from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
+import { Vector3 } from "@react-three/fiber";
 
 //variants
 const banner = {
@@ -57,12 +60,14 @@ const letterAni = {
 
 type Hobby = {
   state: number;
+  position?: Vector3;
   title: string;
   des: string;
 };
 const myHobby = [
   {
     state: 0,
+    position: [10, 0, 18] as Vector3,
     title: "Go Red Devils",
     des: `I'm a huge Manchester United fan. I spent most of my time
   watching the game at 3am. Downside of being an Asian football
@@ -75,6 +80,7 @@ const myHobby = [
   },
   {
     state: 2,
+
     title: "Playlist On the Way",
     des: `Music is my haven, The headphones come on, and everything else in the world goes silent. Linkin Park     and Daft Punk were my favorites, right now The Weekend is my go-to. I'm not restricted by a particular genre of music. `,
   },
@@ -94,7 +100,11 @@ const Intro = () => {
   };
 
   return (
-    <section className="intro-container" data-scroll-section>
+    <section
+      className="intro-container theme-container"
+      data-scroll-section
+      data-theme="dark"
+    >
       <div className="about_intro">
         <motion.div
           variants={banner}
@@ -267,44 +277,10 @@ const Intro = () => {
               Music
             </motion.button>
           </div>
-          <AnimatePresence>
-            <motion.div
-              variants={appear}
-              animate="animate"
-              viewport={{ once: true }}
-              initial="initial"
-              exit="exit"
-              className="wrapper-render"
-            >
-              <div className="render-desc">
-                <h3>{hobby.title}</h3>
-                <p>{hobby.des}</p>
-              </div>
 
-              <div
-                className="render"
-                onMouseEnter={() => {
-                  dispatch(setCursorText("Drag Me"));
-                  dispatch(setCursorVariant("drag"));
-                }}
-                onMouseLeave={leave}
-              >
-                {hobby.state === 0 ? (
-                  <Render control={false} position={[10, 0, 18]}>
-                    <Football scale={0.1} />
-                  </Render>
-                ) : hobby.state === 1 ? (
-                  <Render control={false}>
-                    <Controller scale={2.4} />
-                  </Render>
-                ) : (
-                  <Render control={false}>
-                    <Headphone scale={0.4} position={[0, -4, 0]} />
-                  </Render>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div className="wrapper-render">
+            <Render hobby={hobby} />
+          </div>
         </div>
       </div>
       <div className="skills-section ">

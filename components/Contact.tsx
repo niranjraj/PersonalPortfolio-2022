@@ -3,9 +3,13 @@ import Link from "next/link";
 import SvgComponent from "./SvgComponent";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
-
-import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import {
+  setCursorText,
+  setCursorVariant,
+  setTheme,
+} from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 const banner = {
   animate: {
@@ -41,10 +45,12 @@ const letterAni = {
     },
   },
 };
+
 const mailInfo = {
   id: "niranjrajesh7007@gmail.com",
   subject: "Project or Enquiry",
 };
+
 const Contact = () => {
   const dispatch = useAppDispatch();
 
@@ -62,7 +68,13 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact-container" data-scroll-section>
+    <section
+      className="contact-container theme-container"
+      data-scroll-section
+      data-theme="dark"
+      data-background="var(--darker-primary)"
+      data-text="var(--lighter-primary)"
+    >
       <div className="contact-footer-section">
         <motion.div
           variants={banner}
@@ -70,6 +82,7 @@ const Contact = () => {
           viewport={{ once: true }}
           initial="initial"
           className="intro-subtitle"
+          id="contact-start"
         >
           <span className="row-letter-ani">
             <motion.span className="letter-ani" variants={letterAni}>

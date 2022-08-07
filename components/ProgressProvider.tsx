@@ -18,7 +18,6 @@ const ProgressProvider = ({
 
   useEffect(() => {
     if (progressState) {
-      console.log("hey");
       let initialLoad = setTimeout(() => setValue(valueEnd), 1000);
 
       return () => {

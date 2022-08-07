@@ -11,13 +11,12 @@
     width: 50px;
     border-radius: 50%;
     background: transparent;
-    border: 2px solid #111111;
+    border: 2px solid var(--cursor-default);
     border-radius: 200px;
     pointer-events: none;
     color: #fff;
     text-align: center;
     font-family: workSans;
-    transform: translate(-50%, -50%);
     letter-spacing: 1px;
     font-size: 16px;
 }

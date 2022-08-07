@@ -1,31 +1,36 @@
-import React, { MutableRefObject, useEffect } from "react";
-import useMouse from "@react-hook/mouse-position";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+
+import { motion } from "framer-motion";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 
-type Props = {
-  mouseRef: MutableRefObject<HTMLDivElement | null>;
-};
-
-const CustomCursor = (props: Props) => {
+const CustomCursor = () => {
   const cursorText = useAppSelector((state) => state.cursor.cursorText);
   const cursorVariant = useAppSelector((state) => state.cursor.cursorVariant);
+  const [scrolling, setScrolling] = useState(false);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
 
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  // const cursorX = useMotionValue(-100);
+  // const cursorY = useMotionValue(-100);
+  // const springConfig = { damping: 25, stiffness: 700 };
+  // const cursorXSpring = useSpring(cursorX, springConfig);
+  // const cursorYSpring = useSpring(cursorY, springConfig);
   useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+    const mouseMove = (e: MouseEvent) => {
+      const mouseCurrent = cursorRef.current;
+      const { clientX, clientY } = e;
+      if (mouseCurrent) {
+        const mouseX = clientX - mouseCurrent.clientWidth / 2;
+        const mouseY = clientY - mouseCurrent.clientHeight / 2;
+        mouseCurrent.style.transform = `translate3d(${mouseX}px,${mouseY}px,0)`;
+      }
     };
-    window.addEventListener("mousemove", moveCursor);
+
+    window.addEventListener("mousemove", mouseMove);
+
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mousemove", mouseMove);
     };
-  }, []);
+  }, [cursorRef]);
 
   const variants = {
     default: {
@@ -42,13 +47,13 @@ const CustomCursor = (props: Props) => {
     project: {
       opacity: 1,
       // backgroundColor: "rgba(255, 255, 255, 0.6)",
-      backgroundColor: "#DD4D42",
-      color: "#ffffff",
+      backgroundColor: "#ffffff",
+      color: "#111111",
       height: "10vw",
 
       width: "10vw",
-      fontSize: "18px",
-      borderColor: "#DD4D42",
+      fontSize: "20px",
+      borderColor: "#ffffff",
       transition: {
         ease: [0.77, 0, 0.175, 1],
       },
@@ -115,11 +120,10 @@ const CustomCursor = (props: Props) => {
       variants={variants}
       animate={cursorVariant}
       transition={spring}
-      style={{ left: cursorX, top: cursorY }}
+      ref={cursorRef}
     >
       <span className="cursorText">{cursorText}</span>
     </motion.div>
   );
 };
-
 export default CustomCursor;

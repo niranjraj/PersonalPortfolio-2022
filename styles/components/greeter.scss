@@ -1,22 +1,10 @@
 @use "../base/functions.scss" as *;
-.noise::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 150;
-    opacity: 0.03;
-    pointer-events: none;
-    background: url("/static/noise.gif");
-}
-
 .greeter-container {
     width: 100%;
-    background-color: #E0D8CD;
-    color: #231F20;
+    background-color: var(--theme-primary);
+    color: var(--theme-text);
     position: relative;
+    transition: background 0.5s ease, color 0.8s ease;
 }
 
 .greeter {
@@ -103,7 +91,7 @@
 }
 
 .nav-title a {
-    color: #231F20;
+    color: var(--theme-text);
     line-height: 1.2em;
     margin-bottom: 0.5em;
 }

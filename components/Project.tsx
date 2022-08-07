@@ -1,7 +1,12 @@
-import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  useContext,
+  useEffect,
+} from "react";
 
 import proj1 from "../public/static/invoicelyPhone.png";
 import proj2 from "../public/static/supplyco4.png";
@@ -9,8 +14,13 @@ import proj3 from "../public/static/machinelearning.png";
 import proj5 from "../public/static/arch1.png";
 import proj4 from "../public/static/itiha.png";
 import Link from "next/link";
-import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import {
+  setCursorText,
+  setCursorVariant,
+  setTheme,
+} from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 type projectItem = {
   image: StaticImageData;
@@ -52,7 +62,7 @@ const projectItems: projectItem[] = [
     type: "logic, implementation, webapp, ux",
     speed: "-2",
     width: "600",
-    height: "812",
+    height: "600",
     link: "https://github.com/niranjraj/invoice-app",
   },
   {
@@ -99,6 +109,7 @@ const projectItems: projectItem[] = [
 
 const Project = () => {
   const dispatch = useAppDispatch();
+  const { scroll } = useLocomotiveScroll();
 
   const projectEnter = () => {
     dispatch(setCursorText("View"));
@@ -109,7 +120,11 @@ const Project = () => {
     dispatch(setCursorVariant("default"));
   };
   return (
-    <section className="project-container" data-scroll-section>
+    <section
+      className="project-container theme-container"
+      data-scroll-section
+      data-theme="light"
+    >
       <div className="projects">
         <motion.div
           variants={banner}
@@ -160,16 +175,16 @@ const Project = () => {
                 <Link href={project.link}>
                   <a
                     className="project-item-container"
-                    onMouseEnter={projectEnter}
-                    onMouseLeave={leave}
+                    onMouseOver={projectEnter}
+                    onMouseOut={leave}
                   >
                     <div className="project-item-img-wrapper">
                       <div className={`item-img item-img${index}`}>
                         <Image
                           className="proj-img"
                           data-scroll="true"
-                          data-scroll-speed={project.speed}
-                          data-scroll-offset="-1"
+                          data-scroll-speed="-1.2"
+                          data-scroll-offset="10"
                           src={project.image}
                           height={project.height}
                           width={project.width}

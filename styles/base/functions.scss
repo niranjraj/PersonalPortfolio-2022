@@ -150,3 +150,10 @@ $mq-desktop: 1382px !default;
         @content;
     }
 }
+
+@mixin spread-map($map: ()) {
+    @each $key,
+    $value in $map {
+        #{$key}: $value;
+    }
+}

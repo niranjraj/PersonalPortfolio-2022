@@ -57,7 +57,8 @@ const Greeter = () => {
       variants={banner}
       animate="animate"
       initial="initial"
-      className="greeter-container"
+      data-theme="light"
+      className="greeter-container theme-container"
       data-scroll-section
     >
       <ul className="nav-title">

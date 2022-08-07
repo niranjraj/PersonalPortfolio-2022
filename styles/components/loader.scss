@@ -1,3 +1,4 @@
+@use "../base/functions.scss" as *;
 .loader-container {
     height: 100vh;
     width: 100vw;
@@ -22,19 +23,19 @@
     align-items: center;
 }
 
+.loader-bar {
+    background-color: #E0D8CD;
+    max-width: em(400);
+    width: 0;
+    height: 2px;
+    transition: width 0.5 ease;
+}
+
 .title-year {
     font-size: 6.9rem;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.1em;
     position: relative;
-    &::before {
-        position: absolute;
-        background-color: #E0D8CD;
-        content: "";
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        height: 1px;
-    }
+    line-height: 1;
 }
 
 .subtitle-loader {

@@ -1,7 +1,8 @@
 @use "../base/functions.scss" as *;
 .intro-container {
-    background-color: #231F20;
-    color: #E0D8CD;
+    background-color: var(--theme-primary);
+    color: var(--theme-text);
+    transition: background 0.5s ease, color 0.8s ease;
 }
 
 .about_intro {
@@ -33,7 +34,7 @@
     font-size: 14.5vh;
     font-family: IvyMode;
     font-weight: 300;
-    color: #E0D8CD;
+    color: var(--theme-text);
     overflow: hidden;
     margin-bottom: 1em;
     @include tablet-landscape-and-below {
@@ -142,7 +143,7 @@
         }
     }
     & path {
-        fill: #E0D8CD;
+        fill: var(--theme-text);
     }
 }
 
@@ -258,7 +259,7 @@
         height: 35vw;
     }
     .CircularProgressbar-path {
-        stroke: #E0D8CD!important;
+        stroke: var(--theme-text)!important;
         stroke-width: 2px!important;
     }
     .CircularProgressbar-trail {
@@ -266,7 +267,7 @@
         stroke-width: 2px!important;
     }
     .CircularProgressbar-text {
-        fill: #E0D8CD!important;
+        fill: var(--theme-text)!important;
         font-family: IvyMode;
         text-align: center;
         @include mobile-landscape-and-below {
@@ -339,6 +340,10 @@
     }
 }
 
+.render-animate {
+    height: 100%;
+}
+
 .render-desc {
     width: 40%;
     @include tablet-landscape-and-below {
@@ -371,7 +376,7 @@
             width: 100%;
             position: absolute;
             opacity: 0.8;
-            background: #E0D8CD;
+            background: var(--theme-text);
             left: 0;
             top: 0;
             height: 1px;
@@ -387,11 +392,27 @@
             z-index: -1;
             transform: scaleY(0);
             transform-origin: center top;
-            background-color: #E0D8CD;
+            background: #E0D8CD;
             transition: transform .6s cubic-bezier(.215, .61, .355, 1);
         }
+        // & .hover-skill-item {
+        //     position: absolute;
+        //     bottom: 0;
+        //     top: 0;
+        //     left: -50%;
+        //     right: 0;
+        //     z-index: -1;
+        //     transform: scaleY(0);
+        //     transform-origin: center top;
+        //     background: #E0D8CD;
+        //     transition: transform .6s cubic-bezier(.215, .61, .355, 1);
+        // }
+        // &:hover .hover-skill-item {
+        //     transform: scaleY(1);
+        //     transform-origin: center bottom;
+        // }
         &:hover {
-            color: #231F20;
+            color: var(--theme-primary);
         }
         &:hover::after {
             transform: scaleY(1);

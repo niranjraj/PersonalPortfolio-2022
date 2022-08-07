@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-
+gsap.registerPlugin(ScrollTrigger);
 const SkillItem = ({ title }: { title: string }) => {
   const dispatch = useAppDispatch();
 
+  useEffect(() => {}, []);
   return (
     <li
       onMouseEnter={() => {
@@ -16,6 +19,7 @@ const SkillItem = ({ title }: { title: string }) => {
         dispatch(setCursorText(""));
         dispatch(setCursorVariant("default"));
       }}
+      className="skills-list-item-wrapper"
     >
       <div
         className="skills-list-item"
