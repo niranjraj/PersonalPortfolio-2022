@@ -10,6 +10,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { motion } from "framer-motion-3d";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -34,53 +35,75 @@ type GLTFResult = GLTF & {
   };
 };
 
+const appear = {
+  initial: {
+    opacity: 0,
+    y: -20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [0.77, 0, 0.175, 1],
+      duration: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 100,
+    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
+  },
+};
+
 export default function Controller(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/controller.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh
-          geometry={nodes.Object_2.geometry}
-          material={materials.aiStandardSurface1SG}
-        />
-        <mesh
-          geometry={nodes.Object_3.geometry}
-          material={materials.aiStandardSurface11SG}
-        />
-        <mesh
-          geometry={nodes.Object_4.geometry}
-          material={materials.aiStandardSurface11SG}
-        />
-        <mesh
-          geometry={nodes.Object_5.geometry}
-          material={materials.aiStandardSurface13SG}
-        />
-        <mesh
-          geometry={nodes.Object_6.geometry}
-          material={materials.aiStandardSurface13SG}
-        />
-        <mesh
-          geometry={nodes.Object_7.geometry}
-          material={materials.aiStandardSurface14SG}
-        />
-        <mesh
-          geometry={nodes.Object_8.geometry}
-          material={materials.aiStandardSurface4SG}
-        />
-        <mesh
-          geometry={nodes.Object_9.geometry}
-          material={materials.aiStandardSurface4SG}
-        />
-        <mesh
-          geometry={nodes.Object_10.geometry}
-          material={materials.aiStandardSurface4SG}
-        />
-        <mesh
-          geometry={nodes.Object_11.geometry}
-          material={materials.aiStandardSurface6SG}
-        />
+    <motion.group variants={appear} initial="initial" animate="animate">
+      <group {...props} dispose={null}>
+        <group rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh
+            geometry={nodes.Object_2.geometry}
+            material={materials.aiStandardSurface1SG}
+          />
+          <mesh
+            geometry={nodes.Object_3.geometry}
+            material={materials.aiStandardSurface11SG}
+          />
+          <mesh
+            geometry={nodes.Object_4.geometry}
+            material={materials.aiStandardSurface11SG}
+          />
+          <mesh
+            geometry={nodes.Object_5.geometry}
+            material={materials.aiStandardSurface13SG}
+          />
+          <mesh
+            geometry={nodes.Object_6.geometry}
+            material={materials.aiStandardSurface13SG}
+          />
+          <mesh
+            geometry={nodes.Object_7.geometry}
+            material={materials.aiStandardSurface14SG}
+          />
+          <mesh
+            geometry={nodes.Object_8.geometry}
+            material={materials.aiStandardSurface4SG}
+          />
+          <mesh
+            geometry={nodes.Object_9.geometry}
+            material={materials.aiStandardSurface4SG}
+          />
+          <mesh
+            geometry={nodes.Object_10.geometry}
+            material={materials.aiStandardSurface4SG}
+          />
+          <mesh
+            geometry={nodes.Object_11.geometry}
+            material={materials.aiStandardSurface6SG}
+          />
+        </group>
       </group>
-    </group>
+    </motion.group>
   );
 }
 

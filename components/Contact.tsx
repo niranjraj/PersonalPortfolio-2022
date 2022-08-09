@@ -72,6 +72,7 @@ const Contact = () => {
       className="contact-container theme-container"
       data-scroll-section
       data-theme="dark"
+      id="contact"
       data-background="var(--darker-primary)"
       data-text="var(--lighter-primary)"
     >
@@ -126,7 +127,7 @@ const Contact = () => {
                 </Link>
               </li>
               <li className="row-letter-ani">
-                <Link href="">
+                <Link href="https://www.linkedin.com/in/niranjRaj">
                   <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
                     <motion.span className="letter-ani" variants={letterAni}>
                       LinkedIn
@@ -135,7 +136,7 @@ const Contact = () => {
                 </Link>
               </li>
               <li className="row-letter-ani">
-                <Link href="">
+                <Link href="https://www.instagram.com/niranj.tsx/?hl=en">
                   <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
                     <motion.span className="letter-ani" variants={letterAni}>
                       Instagram

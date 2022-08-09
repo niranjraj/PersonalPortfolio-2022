@@ -10,6 +10,27 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { motion } from "framer-motion-3d";
+
+const appear = {
+  initial: {
+    opacity: 0,
+    y: -20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [0.77, 0, 0.175, 1],
+      duration: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 100,
+    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
+  },
+};
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -48,161 +69,176 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/headphone.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <group
-            position={[2.14, 6.3, 4.68]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
-          >
+    <motion.group variants={appear} initial="initial" animate="animate">
+      <group {...props} dispose={null}>
+        <group rotation={[-Math.PI / 2, 0, 0]}>
+          <group rotation={[Math.PI / 2, 0, 0]}>
             <group
-              position={[-0.06, 0.05, -0.01]}
-              rotation={[-3.09, -1.52, 1.84]}
+              position={[2.14, 6.3, 4.68]}
+              rotation={[-Math.PI / 2, 0, 0]}
+              scale={100}
             >
-              <mesh
-                geometry={nodes["8_EarCab001_earCab_0"].geometry}
-                material={materials.earCab}
-              />
-              <mesh
-                geometry={nodes["8_EarCab001_earCabFabric_0"].geometry}
-                material={materials.earCabFabric}
-              />
-            </group>
-            <group
-              position={[-0.08, 0.04, 0.01]}
-              rotation={[-3.09, -1.52, 1.84]}
-            >
-              <mesh
-                geometry={nodes["7_EarCover001_Headphone_Default_0"].geometry}
-                material={materials.Headphone_Default}
-              />
-              <mesh
-                geometry={nodes["7_EarCover001_MetalRing_0"].geometry}
-                material={materials.MetalRing}
-              />
-            </group>
-            <group
-              position={[-0.07, 0.08, -0.01]}
-              rotation={[-Math.PI, -1.52, 1.57]}
-              scale={1.29}
-            >
-              <mesh
-                geometry={
-                  nodes["6_EarCoverHole001_Headphone_Default_0"].geometry
-                }
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group
-              position={[-0.09, 0.05, 0.01]}
-              rotation={[0, -0.48, -Math.PI / 2]}
-              scale={[1, 0.75, 1]}
-            >
-              <mesh
-                geometry={nodes["4_EarCoverConnector001__0"].geometry}
-                material={materials["4_EarCoverConnector.001__0"]}
-              />
-            </group>
-            <group
-              position={[-0.08, 0.03, -0.01]}
-              rotation={[Math.PI / 2, 0, -1.09]}
-            >
-              <mesh
-                geometry={
-                  nodes["5_EarCoverConnectorHolder001_Headphone_Default_0"]
-                    .geometry
-                }
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group
-              position={[-0.1, 0.05, 0.04]}
-              rotation={[Math.PI / 2, 0, -1.35]}
-            >
-              <mesh
-                geometry={
-                  nodes["2_X_Connector_Bottom001_Headphone_Default_0"].geometry
-                }
-                material={materials.Headphone_Default}
-              />
-              <mesh
-                geometry={nodes["2_X_Connector_Bottom001_MetalRing_0"].geometry}
-                material={materials.MetalRing}
-              />
-            </group>
-            <group
-              position={[-0.09, 0.05, 0.02]}
-              rotation={[0, -0.38, -Math.PI / 2]}
-            >
-              <mesh
-                geometry={nodes["3_Logo001_Headphone_Default_0"].geometry}
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group
-              position={[-0.1, 0.05, 0.05]}
-              rotation={[0, -0.22, -Math.PI / 2]}
-            >
-              <mesh
-                geometry={
-                  nodes["2_X_Connector_Top001_Headphone_Default_0"].geometry
-                }
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group position={[-0.02, 0.05, 0.08]}>
-              <mesh
-                geometry={nodes["01_MetalBar001_HeadbarMetalclean_0"].geometry}
-                material={materials["HeadbarMetal.clean"]}
-              />
-              <mesh
-                geometry={nodes["01_MetalBar001_HeadbarMetal_0"].geometry}
-                material={materials.HeadbarMetal}
-              />
-              <mesh
-                geometry={nodes["01_MetalBar001_Headphone_Default_0"].geometry}
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group position={[-0.02, 0.05, 0.08]} scale={[1, 1.87, 1]}>
-              <mesh
-                geometry={nodes["02_FabricBar001_earCab_0"].geometry}
-                material={materials.earCab}
-              />
-            </group>
-            <group position={[-0.1, 0.05, 0.11]} rotation={[0, 0.35, 0]}>
-              <mesh
-                geometry={nodes["02_BarEnd001_Headphone_Default_0"].geometry}
-                material={materials.Headphone_Default}
-              />
-            </group>
-            <group position={[-0.1, 0.04, 0.11]} rotation={[3.13, 1.21, -1.56]}>
-              <mesh
-                geometry={nodes["02_Screws003_Screw_0"].geometry}
-                material={materials.Screw}
-              />
-            </group>
-            <group position={[-0.1, 0.06, 0.11]} rotation={[3.13, 1.21, -1.56]}>
-              <mesh
-                geometry={nodes["02_Screws004_Screw_0"].geometry}
-                material={materials.Screw}
-              />
-            </group>
-            <group
-              position={[-0.1, 0.03, 0.06]}
-              rotation={[0.18, 1.56, 1.39]}
-              scale={0.59}
-            >
-              <mesh
-                geometry={nodes["02_Screws005_Screw_0"].geometry}
-                material={materials.Screw}
-              />
+              <group
+                position={[-0.06, 0.05, -0.01]}
+                rotation={[-3.09, -1.52, 1.84]}
+              >
+                <mesh
+                  geometry={nodes["8_EarCab001_earCab_0"].geometry}
+                  material={materials.earCab}
+                />
+                <mesh
+                  geometry={nodes["8_EarCab001_earCabFabric_0"].geometry}
+                  material={materials.earCabFabric}
+                />
+              </group>
+              <group
+                position={[-0.08, 0.04, 0.01]}
+                rotation={[-3.09, -1.52, 1.84]}
+              >
+                <mesh
+                  geometry={nodes["7_EarCover001_Headphone_Default_0"].geometry}
+                  material={materials.Headphone_Default}
+                />
+                <mesh
+                  geometry={nodes["7_EarCover001_MetalRing_0"].geometry}
+                  material={materials.MetalRing}
+                />
+              </group>
+              <group
+                position={[-0.07, 0.08, -0.01]}
+                rotation={[-Math.PI, -1.52, 1.57]}
+                scale={1.29}
+              >
+                <mesh
+                  geometry={
+                    nodes["6_EarCoverHole001_Headphone_Default_0"].geometry
+                  }
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group
+                position={[-0.09, 0.05, 0.01]}
+                rotation={[0, -0.48, -Math.PI / 2]}
+                scale={[1, 0.75, 1]}
+              >
+                <mesh
+                  geometry={nodes["4_EarCoverConnector001__0"].geometry}
+                  material={materials["4_EarCoverConnector.001__0"]}
+                />
+              </group>
+              <group
+                position={[-0.08, 0.03, -0.01]}
+                rotation={[Math.PI / 2, 0, -1.09]}
+              >
+                <mesh
+                  geometry={
+                    nodes["5_EarCoverConnectorHolder001_Headphone_Default_0"]
+                      .geometry
+                  }
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group
+                position={[-0.1, 0.05, 0.04]}
+                rotation={[Math.PI / 2, 0, -1.35]}
+              >
+                <mesh
+                  geometry={
+                    nodes["2_X_Connector_Bottom001_Headphone_Default_0"]
+                      .geometry
+                  }
+                  material={materials.Headphone_Default}
+                />
+                <mesh
+                  geometry={
+                    nodes["2_X_Connector_Bottom001_MetalRing_0"].geometry
+                  }
+                  material={materials.MetalRing}
+                />
+              </group>
+              <group
+                position={[-0.09, 0.05, 0.02]}
+                rotation={[0, -0.38, -Math.PI / 2]}
+              >
+                <mesh
+                  geometry={nodes["3_Logo001_Headphone_Default_0"].geometry}
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group
+                position={[-0.1, 0.05, 0.05]}
+                rotation={[0, -0.22, -Math.PI / 2]}
+              >
+                <mesh
+                  geometry={
+                    nodes["2_X_Connector_Top001_Headphone_Default_0"].geometry
+                  }
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group position={[-0.02, 0.05, 0.08]}>
+                <mesh
+                  geometry={
+                    nodes["01_MetalBar001_HeadbarMetalclean_0"].geometry
+                  }
+                  material={materials["HeadbarMetal.clean"]}
+                />
+                <mesh
+                  geometry={nodes["01_MetalBar001_HeadbarMetal_0"].geometry}
+                  material={materials.HeadbarMetal}
+                />
+                <mesh
+                  geometry={
+                    nodes["01_MetalBar001_Headphone_Default_0"].geometry
+                  }
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group position={[-0.02, 0.05, 0.08]} scale={[1, 1.87, 1]}>
+                <mesh
+                  geometry={nodes["02_FabricBar001_earCab_0"].geometry}
+                  material={materials.earCab}
+                />
+              </group>
+              <group position={[-0.1, 0.05, 0.11]} rotation={[0, 0.35, 0]}>
+                <mesh
+                  geometry={nodes["02_BarEnd001_Headphone_Default_0"].geometry}
+                  material={materials.Headphone_Default}
+                />
+              </group>
+              <group
+                position={[-0.1, 0.04, 0.11]}
+                rotation={[3.13, 1.21, -1.56]}
+              >
+                <mesh
+                  geometry={nodes["02_Screws003_Screw_0"].geometry}
+                  material={materials.Screw}
+                />
+              </group>
+              <group
+                position={[-0.1, 0.06, 0.11]}
+                rotation={[3.13, 1.21, -1.56]}
+              >
+                <mesh
+                  geometry={nodes["02_Screws004_Screw_0"].geometry}
+                  material={materials.Screw}
+                />
+              </group>
+              <group
+                position={[-0.1, 0.03, 0.06]}
+                rotation={[0.18, 1.56, 1.39]}
+                scale={0.59}
+              >
+                <mesh
+                  geometry={nodes["02_Screws005_Screw_0"].geometry}
+                  material={materials.Screw}
+                />
+              </group>
             </group>
           </group>
         </group>
       </group>
-    </group>
+    </motion.group>
   );
 }
 

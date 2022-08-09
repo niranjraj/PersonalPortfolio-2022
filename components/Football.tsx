@@ -7,9 +7,11 @@ title: Low Poly Cartoon Football Ball Free
 */
 
 import * as THREE from "three";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+
+import { motion } from "framer-motion-3d";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -22,25 +24,48 @@ type GLTFResult = GLTF & {
   };
 };
 
+const appear = {
+  initial: {
+    opacity: 0,
+    y: -20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [0.77, 0, 0.175, 1],
+      duration: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 100,
+    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
+  },
+};
+
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/football.gltf") as GLTFResult;
+
   return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh
-              geometry={nodes.FootballBall_White_0.geometry}
-              material={materials.White}
-            />
-            <mesh
-              geometry={nodes.FootballBall_Black_0.geometry}
-              material={materials.Black}
-            />
+    <motion.group variants={appear} initial="initial" animate="animate">
+      <group {...props} dispose={null}>
+        <group rotation={[-Math.PI / 2, 0, 0]}>
+          <group rotation={[Math.PI / 2, 0, 0]}>
+            <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+              <mesh
+                geometry={nodes.FootballBall_White_0.geometry}
+                material={materials.White}
+              />
+              <mesh
+                geometry={nodes.FootballBall_Black_0.geometry}
+                material={materials.Black}
+              />
+            </group>
           </group>
         </group>
       </group>
-    </group>
+    </motion.group>
   );
 }
 

@@ -123,6 +123,7 @@ const Project = () => {
     <section
       className="project-container theme-container"
       data-scroll-section
+      id="project"
       data-theme="light"
     >
       <div className="projects">

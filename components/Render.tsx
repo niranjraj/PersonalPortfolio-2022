@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, Vector3 } from "@react-three/fiber";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import dynamic from "next/dynamic";
 import {
   setCursorText,
@@ -59,14 +59,46 @@ const appear = {
 const Render = (props: Props) => {
   const angleToRadians = (angle: number) => (Math.PI / 180) * angle;
   const dispatch = useAppDispatch();
+  const [windowSize, setWindowSize] = useState<number | null>(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== "undefined") {
+      // Handler to call on window resize
+      const handleResize = () => {
+        // Set window width/height to state
+        setWindowSize(window.innerWidth);
+      };
+
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  useEffect(() => {
+    controls.set({ opacity: 0, y: 100 });
+    controls.start({
+      y: 0,
+      opacity: 1,
+
+      transition: { type: "spring", damping: 10, stiffness: 700, mass: 0.35 },
+    });
+  }, [props.hobby.state]);
   return (
     <>
       <motion.div
-        variants={appear}
-        whileInView="animate"
-        viewport={{ once: true }}
-        initial="initial"
         className="render-desc"
+        variants={appear}
+        initial="initial"
+        whileInView="animate"
+        animate={controls}
       >
         <h3>{props.hobby.title}</h3>
         <p>{props.hobby.des}</p>
@@ -99,11 +131,36 @@ const Render = (props: Props) => {
           <pointLight position={[50, 5, 2]} intensity={1} />
           <Suspense fallback={null}>
             {props.hobby.state === 0 ? (
-              <Football scale={0.1} />
+              <Football
+                scale={
+                  windowSize
+                    ? windowSize <= 1024 && windowSize > 480
+                      ? 0.15
+                      : 0.1
+                    : 0.1
+                }
+              />
             ) : props.hobby.state === 1 ? (
-              <Controller scale={2.4} />
+              <Controller
+                scale={
+                  windowSize
+                    ? windowSize <= 1024 && windowSize > 480
+                      ? 3
+                      : 2.4
+                    : 2.4
+                }
+              />
             ) : (
-              <Headphone scale={0.4} position={[0, -4, 0]} />
+              <Headphone
+                scale={
+                  windowSize
+                    ? windowSize <= 1024 && windowSize > 480
+                      ? 0.5
+                      : 0.4
+                    : 0.4
+                }
+                position={[0, -4, 0]}
+              />
             )}
           </Suspense>
         </Canvas>

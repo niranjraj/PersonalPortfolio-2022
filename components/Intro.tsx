@@ -103,6 +103,7 @@ const Intro = () => {
     <section
       className="intro-container theme-container"
       data-scroll-section
+      id="about"
       data-theme="dark"
     >
       <div className="about_intro">
@@ -300,14 +301,14 @@ const Intro = () => {
         </h2>
         <div className="skills">
           <ul>
-            <SkillItem title="React" />
-            <SkillItem title="html & css," />
-            <SkillItem title="Python" />
-            <SkillItem title="JavaScript" />
-            <SkillItem title="Django" />
-            <SkillItem title="Tailwind" />
-            <SkillItem title="NextJs" />
-            <SkillItem title="TypeScript" />
+            <SkillItem title="React" source="/static/reactLogo.png" />
+            <SkillItem title="html & css," source="/static/html.png" />
+            <SkillItem title="Python" source="/static/python.png" />
+            <SkillItem title="JavaScript" source="/static/javascript.png" />
+            <SkillItem title="Django" source="/static/django.png" />
+            <SkillItem title="Tailwind" source="/static/tailwind.png" />
+            <SkillItem title="NextJs" source="/static/nextLogo.png" />
+            <SkillItem title="TypeScript" source="/static/typescript.png" />
           </ul>
         </div>
       </div>

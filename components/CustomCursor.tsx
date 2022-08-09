@@ -72,6 +72,20 @@ const CustomCursor = () => {
         ease: [0.77, 0, 0.175, 1],
       },
     },
+    skill: {
+      opacity: 1,
+      // backgroundColor: "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "#DD4D42",
+      color: "#ffffff",
+      height: "7vw",
+
+      width: "7vw",
+      fontSize: "32px",
+      borderColor: "#DD4D42",
+      transition: {
+        ease: [0.77, 0, 0.175, 1],
+      },
+    },
     contact: {
       opacity: 1,
       backgroundColor: "#FFBCBC",

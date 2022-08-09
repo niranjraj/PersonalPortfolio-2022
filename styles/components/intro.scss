@@ -345,6 +345,7 @@
 }
 
 .render-desc {
+    opacity: 0;
     width: 40%;
     @include tablet-landscape-and-below {
         width: 80%;
@@ -364,6 +365,7 @@
 }
 
 .skills {
+    cursor: none;
     & li {
         width: 100%;
         position: relative;
@@ -371,17 +373,21 @@
         margin: 0;
         font-size: 1.2rem;
         transition: all .5s;
-        &::before {
-            content: '';
-            width: 100%;
-            position: absolute;
-            opacity: 0.8;
-            background: var(--theme-text);
-            left: 0;
-            top: 0;
-            height: 1px;
-            transition: all .5s cubic-bezier(.215, .61, .355, 1);
-        }
+        transform-style: preserve-3d;
+        border-top: 1px solid var(--theme-text);
+        // &::before {
+        //     content: '';
+        //     width: 100%;
+        //     position: absolute;
+        //     opacity: 0.8;
+        //     background: var(--theme-text);
+        //     left: 0;
+        //     top: 0;
+        //     height: 1px;
+        //     transition: all .5s cubic-bezier(.215, .61, .355, 1);
+        //     z-index: -1;
+        //     transform: translateZ(-1px);
+        // }
         &::after {
             content: '';
             position: absolute;
@@ -395,22 +401,6 @@
             background: #E0D8CD;
             transition: transform .6s cubic-bezier(.215, .61, .355, 1);
         }
-        // & .hover-skill-item {
-        //     position: absolute;
-        //     bottom: 0;
-        //     top: 0;
-        //     left: -50%;
-        //     right: 0;
-        //     z-index: -1;
-        //     transform: scaleY(0);
-        //     transform-origin: center top;
-        //     background: #E0D8CD;
-        //     transition: transform .6s cubic-bezier(.215, .61, .355, 1);
-        // }
-        // &:hover .hover-skill-item {
-        //     transform: scaleY(1);
-        //     transform-origin: center bottom;
-        // }
         &:hover {
             color: var(--theme-primary);
         }
@@ -432,7 +422,10 @@
 }
 
 .skills {
-    overflow: hidden;
+    position: relative;
+    & ul {
+        padding-bottom: 15em;
+    }
 }
 
 .skills-list-item {
@@ -458,4 +451,16 @@
             padding-left: 3.4vw;
         }
     }
+}
+
+.skills-list-item-wrapper {
+    z-index: 1;
+}
+
+.image-hover-reveal {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    left: 50%;
+    opacity: 0;
 }
