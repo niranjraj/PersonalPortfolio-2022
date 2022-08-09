@@ -26,8 +26,8 @@
     font-family: IvyMode;
     font-weight: 400;
     font-style: normal;
-    font-size: 13.5vh;
     width: 82%;
+    font-size: 14.5vh;
     line-height: 1;
     @include tablet-only {
         font-size: 12vw;
@@ -38,19 +38,23 @@
         width: 100%;
     }
     @include mobile-landscape-and-below {
-        font-size: 2.5rem;
+        font-size: 10vw;
         width: 100%;
-        line-height: 1.6;
+        line-height: 1.2;
     }
-    @include mobile-only {
-        font-size: 2.2rem;
-    }
+    @include mobile-only {}
     & .row {
-        line-height: 1;
         overflow: hidden;
         & span {
             display: inline-block;
             white-space: nowrap;
+            height: 16.32vh;
+            @include tablet-landscape-and-below {
+                height: 14vw;
+            }
+            @include mobile-landscape-and-below {
+                height: auto;
+            }
         }
     }
 }
@@ -75,7 +79,12 @@
         right: 0;
     }
     @include mobile-landscape-and-below {
+        position: fixed;
+        z-index: 1700;
         right: 0;
+        transform: translateX(-10%);
+        width: calc(100% - 100px);
+        justify-content: space-between;
     }
     @include mobile-only {
         height: 100px;
@@ -86,6 +95,7 @@
         font-size: 1.6rem;
         @include mobile-landscape-and-below {
             font-size: 1.2rem;
+            margin-right: 0;
         }
     }
 }
@@ -94,4 +104,7 @@
     color: var(--theme-text);
     line-height: 1.2em;
     margin-bottom: 0.5em;
+    @include mobile-landscape-and-below {
+        mix-blend-mode: difference;
+    }
 }

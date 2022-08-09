@@ -12,6 +12,7 @@ import {
   setCursorText,
   setCursorVariant,
   setTheme,
+  setGif,
 } from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 import { Vector3 } from "@react-three/fiber";
@@ -98,6 +99,14 @@ const Intro = () => {
     dispatch(setCursorText(""));
     dispatch(setCursorVariant("default"));
   };
+  const IntroHover = () => {
+    dispatch(setCursorVariant("gif"));
+    dispatch(setGif("/static/giphy.gif"));
+  };
+  const IntroLeave = () => {
+    dispatch(setGif(null));
+    dispatch(setCursorVariant("default"));
+  };
 
   return (
     <section
@@ -162,8 +171,22 @@ const Intro = () => {
             </span>
           </motion.p>
           <div className="intro-image">
+            <motion.div
+              whileInView={{
+                height: 0,
+                transition: {
+                  delay: 0.1,
+                  ease: [0.215, 0.61, 0.355, 1],
+                  duration: 0.8,
+                },
+              }}
+              viewport={{ once: true, amount: 0.5 }}
+              className="hide-container"
+            ></motion.div>
             <Image
-              src="/static/beachfront.jpeg"
+              onMouseEnter={IntroHover}
+              onMouseLeave={IntroLeave}
+              src="/static/headshot.png"
               className="intro-img-content"
               layout="fill"
               objectFit="contain"
@@ -242,7 +265,7 @@ const Intro = () => {
               initial="initial"
               onMouseEnter={hobby.state !== 0 ? buttonEnter : leave}
               onMouseLeave={leave}
-              style={{ color: hobby.state === 0 ? "#E0D8CD" : "#b4ada2" }}
+              style={{ color: hobby.state === 0 ? "#ebd2b1" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[0]);
               }}
@@ -256,7 +279,7 @@ const Intro = () => {
               onMouseLeave={leave}
               viewport={{ once: true }}
               initial="initial"
-              style={{ color: hobby.state === 1 ? "#E0D8CD" : "#b4ada2" }}
+              style={{ color: hobby.state === 1 ? "#ebd2b1" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[1]);
               }}
@@ -270,7 +293,7 @@ const Intro = () => {
               onMouseLeave={leave}
               viewport={{ once: true }}
               initial="initial"
-              style={{ color: hobby.state === 2 ? "#E0D8CD" : "#b4ada2" }}
+              style={{ color: hobby.state === 2 ? "#ebd2b1" : "#b4ada2" }}
               onClick={() => {
                 setHobby(myHobby[2]);
               }}

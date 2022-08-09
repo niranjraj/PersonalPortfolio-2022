@@ -18,19 +18,22 @@ const Loader = (props: Props) => {
     let initial = 1999;
     const currentLoad = loaderRef.current as HTMLDivElement;
     const year = new Date().getFullYear();
+    const subtitle = document.querySelector(".subtitle-loader");
 
     function loading() {
-      id = setInterval(frame, 200);
+      id = setInterval(frame, 100);
     }
 
     function frame() {
       if (initial >= year) {
+        if (subtitle) {
+          subtitle.innerHTML = "Welcome";
+        }
         clearInterval(id);
+
         if (props.setLoading) {
           props.setLoading(false);
         }
-
-        console.log("false");
       } else {
         initial++;
         currentLoad.innerHTML = `${initial}`;
@@ -46,7 +49,7 @@ const Loader = (props: Props) => {
         1999
       </div>
       <div className="loader-bar"></div>
-      <div className="subtitle-loader">was born</div>
+      <div className="subtitle-loader"></div>
     </div>
   );
 };

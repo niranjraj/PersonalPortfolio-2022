@@ -81,6 +81,7 @@
         }
         & a {
             position: relative;
+            color: var(--theme-text);
         }
         & a::before {
             content: "";
@@ -88,7 +89,7 @@
             bottom: 0;
             width: 100%;
             height: 2px;
-            background-color: var(--theme-secondary);
+            background-color: var(--theme-text);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform .8s cubic-bezier(.19, 1, .22, 1), -webkit-transform .8s cubic-bezier(.19, 1, .22, 1);
@@ -131,6 +132,7 @@
     font-size: 1.6rem;
     padding: 15px 0;
     margin-bottom: 2em;
+    color: var(--theme-text);
     box-shadow: inset 0 0 var(--theme-secondary);
     transition: all .6s;
     @include tablet-portrait-and-below {
@@ -145,9 +147,10 @@
     }
     & path {
         transition: all .6s;
+        fill: var(--theme-text);
     }
     &:hover {
-        box-shadow: 0 -150px 0 0 var(--theme-secondary) inset;
+        box-shadow: 0 -150px 0 0 var(--theme-text) inset;
         color: var(--theme-primary);
         padding: 15px 1.3em;
     }

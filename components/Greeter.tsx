@@ -115,7 +115,16 @@ const Greeter = () => {
             <Letter title="apps that cater" />
           </span>
           <span className="row">
-            <Letter title="an interactive and appealing digital experience." />
+            <Letter title="art direction," />
+          </span>
+          <span className="row">
+            <Letter title="interactive design" />
+          </span>
+          <span className="row">
+            <Letter title="and appealing digital" />
+          </span>
+          <span className="row">
+            <Letter title="experience." />
           </span>
         </h1>
       </div>

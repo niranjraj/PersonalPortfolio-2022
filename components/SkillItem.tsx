@@ -11,28 +11,32 @@ const SkillItem = ({ title, source }: { title: string; source: string }) => {
 
   const listRef = useRef<HTMLLIElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const list = listRef.current;
     const image = imageRef.current;
+    const scaleImage = document.querySelector(".hover-image") as HTMLElement;
     console.log();
 
     const imageMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
 
-      if (image && list) {
+      if (image && list && scaleImage) {
         image.style.left = `${clientX + list?.clientWidth / 5}px`;
         image.style.top = `${clientY / 3}px`;
 
         image.style.opacity = "1";
+
         list.style.zIndex = "50";
       }
     };
     const imageLeave = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      if (image && list) {
+      if (image && list && scaleImage) {
         image.style.opacity = "0";
 
         list.style.zIndex = "1";
+
         image.style.left = `${-clientX + list?.clientWidth / 5}px`;
         image.style.top = `${-clientY / 3}px`;
       }
@@ -67,7 +71,12 @@ const SkillItem = ({ title, source }: { title: string; source: string }) => {
         <h2 data-text={`${title}  `}>{title}</h2>
 
         <div className="image-hover-reveal" ref={imageRef}>
-          <Image className="hove-image" src={source} height="300" width="300" />
+          <Image
+            className="hover-image"
+            src={source}
+            height="300"
+            width="300"
+          />
         </div>
       </div>
     </li>

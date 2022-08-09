@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 
 const CustomCursor = () => {
   const cursorText = useAppSelector((state) => state.cursor.cursorText);
   const cursorVariant = useAppSelector((state) => state.cursor.cursorVariant);
+  const gif = useAppSelector((state) => state.cursor.gif);
   const [scrolling, setScrolling] = useState(false);
+
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
   // const cursorX = useMotionValue(-100);
@@ -47,13 +49,13 @@ const CustomCursor = () => {
     project: {
       opacity: 1,
       // backgroundColor: "rgba(255, 255, 255, 0.6)",
-      backgroundColor: "#ffffff",
-      color: "#111111",
-      height: "10vw",
+      backgroundColor: "#DD4D42",
+      color: "#ffffff",
+      height: "9vw",
 
-      width: "10vw",
+      width: "9vw",
       fontSize: "20px",
-      borderColor: "#ffffff",
+      borderColor: "#DD4D42",
       transition: {
         ease: [0.77, 0, 0.175, 1],
       },
@@ -99,9 +101,10 @@ const CustomCursor = () => {
       opacity: 1,
       height: "5vw",
       width: "5vw",
+      color: "#231F20",
       fontSize: "18px",
-      backgroundColor: "#1D4AC0",
-      borderColor: "#1D4AC0",
+      backgroundColor: "#DD4D42",
+      borderColor: "#DD4D42",
     },
     mail: {
       opacity: 1,
@@ -120,24 +123,41 @@ const CustomCursor = () => {
       backgroundColor: "#DD4D42",
       borderColor: "#DD4D42",
     },
+    gif: {
+      opacity: 1,
+      height: "10vw",
+      backgroundColor: "none",
+      borderColor: "transparent",
+
+      width: "10vw",
+    },
+  };
+
+  const cursorTextVariants = {
+    intro: {},
   };
 
   const spring = {
     type: "spring",
-    stiffness: 500,
-    damping: 28,
+    stiffness: 100,
+    damping: 20,
   };
 
   return (
-    <motion.div
-      className="circle"
-      variants={variants}
-      animate={cursorVariant}
-      transition={spring}
-      ref={cursorRef}
-    >
-      <span className="cursorText">{cursorText}</span>
-    </motion.div>
+    <>
+      <motion.div
+        className="circle"
+        variants={variants}
+        animate={cursorVariant}
+        transition={spring}
+        ref={cursorRef}
+      >
+        <span className="cursorText">{cursorText}</span>
+        {gif && (
+          <Image src={gif} className="cursorImage" height="300" width="300" />
+        )}
+      </motion.div>
+    </>
   );
 };
 export default CustomCursor;

@@ -8,7 +8,9 @@ interface CursorState {
   cursorVariant:string;
 theme:string;
 loading:boolean;
+gif: string | null;
 }
+
 
 
 const initialState: CursorState = {
@@ -16,6 +18,7 @@ const initialState: CursorState = {
  cursorVariant: "default",
  theme:"light",
  loading:true,
+ gif:null,
 
 
 }
@@ -33,6 +36,9 @@ export const cursorSlice = createSlice({
       state.cursorVariant= action.payload
   
     },
+    setGif:(state, action: PayloadAction<string | null>) => {
+      state.gif = action.payload
+    },
     setTheme: (state, action: PayloadAction<string>) => {
       state.theme= action.payload
   
@@ -47,7 +53,7 @@ export const cursorSlice = createSlice({
   },
 })
 
-export const {   setCursorText,setCursorVariant,setTheme ,setLoading} = cursorSlice.actions
+export const {   setCursorText,setCursorVariant,setTheme ,setLoading, setGif} = cursorSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCursorText = (state: RootState) => state.cursor.cursorText
