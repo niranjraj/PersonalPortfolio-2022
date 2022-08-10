@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 
-type Props = {
-  loading: boolean;
-};
 const ScrollTriggerProxy = () => {
   const { scroll } = useLocomotiveScroll();
   gsap.registerPlugin(ScrollTrigger);
@@ -21,7 +18,6 @@ const ScrollTriggerProxy = () => {
             : scroll.scroll.instance.scroll.y;
         },
         getBoundingClientRect() {
-          console.log("in scroll");
           return {
             top: 0,
             left: 0,
@@ -34,9 +30,9 @@ const ScrollTriggerProxy = () => {
 
       const arrayContainer = document.querySelectorAll(".theme-container");
 
-      arrayContainer?.forEach((item, index) => {
+      arrayContainer?.forEach((item) => {
         const currentTheme = item.getAttribute("data-theme");
-        console.log(currentTheme);
+
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -47,12 +43,12 @@ const ScrollTriggerProxy = () => {
           },
         });
       });
-    }
 
-    return () => {
-      ScrollTrigger.addEventListener("refresh", () => scroll?.update());
-      ScrollTrigger.refresh();
-    };
+      return () => {
+        ScrollTrigger.addEventListener("refresh", () => scroll?.update());
+        ScrollTrigger.refresh();
+      };
+    }
   }, [scroll]);
 
   return null;

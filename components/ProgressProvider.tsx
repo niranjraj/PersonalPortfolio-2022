@@ -1,6 +1,4 @@
-import { animate } from "framer-motion";
 import React, { useEffect } from "react";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 type Props = {
   valueStart: number;
@@ -8,6 +6,7 @@ type Props = {
   progressState: boolean;
   children: (value: number) => React.ReactElement<any, any>;
 };
+
 const ProgressProvider = ({
   valueStart,
   valueEnd,

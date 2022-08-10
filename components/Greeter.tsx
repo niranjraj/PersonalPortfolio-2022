@@ -3,43 +3,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
 import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
-import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-
-//variants
-const banner = {
-  animate: {
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
-    },
-  },
-};
-const letter = {
-  initial: {
-    y: 300,
-  },
-  animate: {
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 1,
-    },
-  },
-};
-const appear = {
-  initial: {
-    opacity: 0,
-    y: -100,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 0.8,
-    },
-  },
-};
+import { useAppDispatch } from "../redux/redux-hooks";
+import { banner, appear } from "../utils/variants";
 
 const Greeter = () => {
   const dispatch = useAppDispatch();

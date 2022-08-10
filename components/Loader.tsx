@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { useEffect, useRef, Dispatch, SetStateAction } from "react";
 
 type Props = {
   load?: boolean;
@@ -12,13 +6,12 @@ type Props = {
 };
 const Loader = (props: Props) => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
-
+  const subtitleRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     let id: NodeJS.Timer;
     let initial = 1999;
     const currentLoad = loaderRef.current as HTMLDivElement;
     const year = new Date().getFullYear();
-    const subtitle = document.querySelector(".subtitle-loader");
 
     function loading() {
       id = setInterval(frame, 100);
@@ -26,9 +19,6 @@ const Loader = (props: Props) => {
 
     function frame() {
       if (initial >= year) {
-        if (subtitle) {
-          subtitle.innerHTML = "Welcome";
-        }
         clearInterval(id);
 
         if (props.setLoading) {
@@ -42,14 +32,13 @@ const Loader = (props: Props) => {
     if (props.load) {
       loading();
     }
-  }, []);
+  }, [props.load]);
   return (
     <div className="loader-container">
       <div className="title-year" ref={loaderRef}>
         1999
       </div>
       <div className="loader-bar"></div>
-      <div className="subtitle-loader"></div>
     </div>
   );
 };

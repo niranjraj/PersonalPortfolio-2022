@@ -2,13 +2,9 @@ import React, { Suspense, useEffect, useState } from "react";
 import { Canvas, Vector3 } from "@react-three/fiber";
 import { motion, useAnimation } from "framer-motion";
 import dynamic from "next/dynamic";
-import {
-  setCursorText,
-  setCursorVariant,
-  setTheme,
-} from "../redux/cursor-slice";
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-
+import { appear } from "../utils/variants";
 import {
   OrbitControls,
   TrackballControls,
@@ -36,26 +32,6 @@ type Props = {
   hobby: Hobby;
 };
 
-const appear = {
-  initial: {
-    opacity: 0,
-    y: 100,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 0.8,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 100,
-    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
-  },
-};
-
 const Render = (props: Props) => {
   const angleToRadians = (angle: number) => (Math.PI / 180) * angle;
   const dispatch = useAppDispatch();
@@ -67,17 +43,13 @@ const Render = (props: Props) => {
     if (typeof window !== "undefined") {
       // Handler to call on window resize
       const handleResize = () => {
-        // Set window width/height to state
         setWindowSize(window.innerWidth);
       };
 
       // Add event listener
       window.addEventListener("resize", handleResize);
-
-      // Call handler right away so state gets updated with initial window size
       handleResize();
 
-      // Remove event listener on cleanup
       return () => window.removeEventListener("resize", handleResize);
     }
   }, []);
@@ -90,7 +62,7 @@ const Render = (props: Props) => {
 
       transition: { type: "spring", damping: 10, stiffness: 700, mass: 0.35 },
     });
-  }, [props.hobby.state]);
+  }, [props.hobby.state, controls]);
   return (
     <>
       <motion.div

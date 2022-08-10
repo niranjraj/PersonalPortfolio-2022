@@ -7,10 +7,11 @@ title: Xbox One Controller Free
 */
 
 import * as THREE from "three";
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { motion } from "framer-motion-3d";
+import { appearRender } from "../utils/variants";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -35,30 +36,10 @@ type GLTFResult = GLTF & {
   };
 };
 
-const appear = {
-  initial: {
-    opacity: 0,
-    y: -20,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 100,
-    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
-  },
-};
-
 export default function Controller(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/controller.glb") as GLTFResult;
   return (
-    <motion.group variants={appear} initial="initial" animate="animate">
+    <motion.group variants={appearRender} initial="initial" animate="animate">
       <group {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <mesh

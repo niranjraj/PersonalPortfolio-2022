@@ -1,115 +1,17 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Letter from "./Letter";
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useContext,
-  useEffect,
-} from "react";
+import React from "react";
 
-import proj1 from "../public/static/invoicelyPhone.png";
-import proj2 from "../public/static/supplyco4.png";
-import proj3 from "../public/static/machinelearning.png";
-import proj5 from "../public/static/arch1.png";
-import proj4 from "../public/static/itiha.png";
 import Link from "next/link";
-import {
-  setCursorText,
-  setCursorVariant,
-  setTheme,
-} from "../redux/cursor-slice";
-import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
+import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
+import { useAppDispatch } from "../redux/redux-hooks";
 
-type projectItem = {
-  image: StaticImageData;
-  title: string;
-  subtitle: string;
-  type: string;
-  speed: string;
-  width: string;
-  height: string;
-  link: string;
-};
-const letterAni = {
-  initial: {
-    y: 300,
-  },
-  animate: {
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 0.6,
-    },
-  },
-};
-
-const banner = {
-  animate: {
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const projectItems: projectItem[] = [
-  {
-    image: proj1,
-    title: "Invoicely",
-    subtitle: "a professional web app for Invoices",
-    type: "logic, implementation, webapp, ux",
-    speed: "-2",
-    width: "600",
-    height: "600",
-    link: "https://github.com/niranjraj/invoice-app",
-  },
-  {
-    image: proj2,
-    title: "SupplycoKerala",
-    subtitle: "an online platform for government supply",
-    type: "design, logic, implementation, website, ui/ux",
-    speed: "-2",
-    width: "600",
-    height: "600",
-    link: "https://github.com/niranjraj/invoice-app",
-  },
-  {
-    image: proj3,
-    title: "Diabetes Prediction",
-    subtitle: "diagnosis of diabetes through machine learning",
-    type: "logic, implementation, report",
-    speed: "-2",
-    width: "800",
-    height: "800",
-    link: "https://github.com/niranjraj/invoice-app",
-  },
-  {
-    image: proj4,
-    title: "Itiha",
-    subtitle: "configuration of arch.",
-    type: "logic, implementation, website",
-    speed: "-2",
-    width: "800",
-    height: "800",
-    link: "https://github.com/niranjraj/invoice-app",
-  },
-  {
-    image: proj5,
-    title: "Arch",
-    subtitle: "configuration of arch.",
-    type: "design, experiment, config",
-    speed: "-2",
-    width: "800",
-    height: "800",
-    link: "https://github.com/niranjraj/invoice-app",
-  },
-];
+import { banner, letterAni } from "../utils/variants";
+import { projectItems } from "../utils/data";
 
 const Project = () => {
   const dispatch = useAppDispatch();
-  const { scroll } = useLocomotiveScroll();
 
   const projectEnter = () => {
     dispatch(setCursorText("View"));
@@ -186,6 +88,7 @@ const Project = () => {
                           data-scroll="true"
                           data-scroll-speed="-1.2"
                           data-scroll-offset="10"
+                          alt={project.title}
                           src={project.image}
                           height={project.height}
                           width={project.width}

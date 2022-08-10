@@ -6,9 +6,10 @@ import type { RootState } from './store'
 interface CursorState {
   cursorText: string;
   cursorVariant:string;
-theme:string;
+
 loading:boolean;
 gif: string | null;
+
 }
 
 
@@ -16,9 +17,10 @@ gif: string | null;
 const initialState: CursorState = {
  cursorText: "",
  cursorVariant: "default",
- theme:"light",
+
  loading:true,
  gif:null,
+
 
 
 }
@@ -39,21 +41,20 @@ export const cursorSlice = createSlice({
     setGif:(state, action: PayloadAction<string | null>) => {
       state.gif = action.payload
     },
-    setTheme: (state, action: PayloadAction<string>) => {
-      state.theme= action.payload
   
-    },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading= action.payload
   
     },
+
+  
   
    
    
   },
 })
 
-export const {   setCursorText,setCursorVariant,setTheme ,setLoading, setGif} = cursorSlice.actions
+export const {   setCursorText,setCursorVariant,setLoading, setGif} = cursorSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCursorText = (state: RootState) => state.cursor.cursorText

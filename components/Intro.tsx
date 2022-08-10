@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import SvgComponent from "./SvgComponent";
 
@@ -6,86 +6,12 @@ import Language from "./Language";
 import Render from "./Render";
 
 import SkillItem from "./SkillItem";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  setCursorText,
-  setCursorVariant,
-  setTheme,
-  setGif,
-} from "../redux/cursor-slice";
-import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-import { Vector3 } from "@react-three/fiber";
+import { motion } from "framer-motion";
+import { setCursorText, setCursorVariant, setGif } from "../redux/cursor-slice";
+import { useAppDispatch, useAppSelector } from "../redux/redux-hooks";
 
-//variants
-const banner = {
-  animate: {
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const appear = {
-  initial: {
-    opacity: 0,
-    y: 100,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 0.8,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 100,
-    transition: { ease: [0.77, 0, 0.175, 1], duration: 0.8 },
-  },
-};
-const letterAni = {
-  initial: {
-    y: 300,
-  },
-  animate: {
-    y: 0,
-    transition: {
-      ease: [0.77, 0, 0.175, 1],
-      duration: 0.8,
-    },
-  },
-};
-
-type Hobby = {
-  state: number;
-  position?: Vector3;
-  title: string;
-  des: string;
-};
-const myHobby = [
-  {
-    state: 0,
-    position: [10, 0, 18] as Vector3,
-    title: "Go Red Devils",
-    des: `I'm a huge Manchester United fan. I spent most of my time
-  watching the game at 3am. Downside of being an Asian football
-  fan.`,
-  },
-  {
-    state: 1,
-    title: "PC Master Race",
-    des: `Gaming has always been my interest as a child, It is also what led me to love technology. FPS games are my favorite some them are Valorant, Apex, CS 1.6, I'm also down to play other games as well.`,
-  },
-  {
-    state: 2,
-
-    title: "Playlist On the Way",
-    des: `Music is my haven, The headphones come on, and everything else in the world goes silent. Linkin Park     and Daft Punk were my favorites, right now The Weekend is my go-to. I'm not restricted by a particular genre of music. `,
-  },
-];
+import { Hobby, myHobby } from "../utils/data";
+import { banner, appear, letterAni } from "../utils/variants";
 
 const Intro = () => {
   const [hobby, setHobby] = useState<Hobby>(myHobby[0]);
@@ -189,6 +115,7 @@ const Intro = () => {
               src="/static/headshot.png"
               className="intro-img-content"
               layout="fill"
+              alt="portrait"
               objectFit="contain"
             />
           </div>
@@ -221,8 +148,9 @@ const Intro = () => {
               <li>Hardworking and genuine</li>
               <li>Living in India</li>
               <li>Night Owl</li>
-              <li>Currently listening to Nothing</li>
+              <li>Currently listening to nothing</li>
             </motion.ul>
+
             <Language />
           </div>
           <div className="about-desc">

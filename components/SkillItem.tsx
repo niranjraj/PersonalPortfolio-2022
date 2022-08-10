@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
-import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
+import { useAppDispatch } from "../redux/redux-hooks";
 gsap.registerPlugin(ScrollTrigger);
+
 const SkillItem = ({ title, source }: { title: string; source: string }) => {
   const dispatch = useAppDispatch();
 
@@ -16,38 +17,34 @@ const SkillItem = ({ title, source }: { title: string; source: string }) => {
     const list = listRef.current;
     const image = imageRef.current;
     const scaleImage = document.querySelector(".hover-image") as HTMLElement;
-    console.log();
 
-    const imageMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
+    if (image && list && scaleImage) {
+      const imageMove = (e: MouseEvent) => {
+        const { clientX, clientY } = e;
 
-      if (image && list && scaleImage) {
         image.style.left = `${clientX + list?.clientWidth / 5}px`;
         image.style.top = `${clientY / 3}px`;
-
         image.style.opacity = "1";
-
         list.style.zIndex = "50";
-      }
-    };
-    const imageLeave = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      if (image && list && scaleImage) {
+      };
+
+      const imageLeave = (e: MouseEvent) => {
+        const { clientX, clientY } = e;
+
         image.style.opacity = "0";
-
         list.style.zIndex = "1";
-
         image.style.left = `${-clientX + list?.clientWidth / 5}px`;
         image.style.top = `${-clientY / 3}px`;
-      }
-    };
-    list?.addEventListener("mousemove", imageMove);
-    list?.addEventListener("mouseleave", imageLeave);
-    return () => {
-      list?.removeEventListener("mousemove", imageMove);
-      list?.removeEventListener("mouseleave", imageLeave);
-    };
-  }, [listRef.current]);
+      };
+
+      list?.addEventListener("mousemove", imageMove);
+      list?.addEventListener("mouseleave", imageLeave);
+      return () => {
+        list?.removeEventListener("mousemove", imageMove);
+        list?.removeEventListener("mouseleave", imageLeave);
+      };
+    }
+  }, [listRef]);
   return (
     <li
       onMouseEnter={() => {
@@ -76,6 +73,7 @@ const SkillItem = ({ title, source }: { title: string; source: string }) => {
             src={source}
             height="300"
             width="300"
+            alt="portrait"
           />
         </div>
       </div>

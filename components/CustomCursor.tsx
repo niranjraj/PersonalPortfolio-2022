@@ -1,21 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
-
+import { useAppSelector } from "../redux/redux-hooks";
+import { variants } from "../utils/variants";
 const CustomCursor = () => {
   const cursorText = useAppSelector((state) => state.cursor.cursorText);
   const cursorVariant = useAppSelector((state) => state.cursor.cursorVariant);
   const gif = useAppSelector((state) => state.cursor.gif);
-  const [scrolling, setScrolling] = useState(false);
 
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
-  // const cursorX = useMotionValue(-100);
-  // const cursorY = useMotionValue(-100);
-  // const springConfig = { damping: 25, stiffness: 700 };
-  // const cursorXSpring = useSpring(cursorX, springConfig);
-  // const cursorYSpring = useSpring(cursorY, springConfig);
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
       const mouseCurrent = cursorRef.current;
@@ -28,114 +22,10 @@ const CustomCursor = () => {
     };
 
     window.addEventListener("mousemove", mouseMove);
-
     return () => {
       window.removeEventListener("mousemove", mouseMove);
     };
   }, [cursorRef]);
-
-  const variants = {
-    default: {
-      opacity: 1,
-      height: 50,
-      width: 50,
-      fontSize: "16px",
-
-      transition: {
-        type: "spring",
-        mass: 0.6,
-      },
-    },
-    project: {
-      opacity: 1,
-      // backgroundColor: "rgba(255, 255, 255, 0.6)",
-      backgroundColor: "#DD4D42",
-      color: "#ffffff",
-      height: "9vw",
-
-      width: "9vw",
-      fontSize: "20px",
-      borderColor: "#DD4D42",
-      transition: {
-        ease: [0.77, 0, 0.175, 1],
-      },
-    },
-    drag: {
-      opacity: 1,
-      // backgroundColor: "rgba(255, 255, 255, 0.6)",
-      backgroundColor: "#DD4D42",
-      color: "#ffffff",
-      height: "7vw",
-
-      width: "7vw",
-      fontSize: "18px",
-      borderColor: "#DD4D42",
-      transition: {
-        ease: [0.77, 0, 0.175, 1],
-      },
-    },
-    skill: {
-      opacity: 1,
-      // backgroundColor: "rgba(255, 255, 255, 0.6)",
-      backgroundColor: "#DD4D42",
-      color: "#ffffff",
-      height: "7vw",
-
-      width: "7vw",
-      fontSize: "32px",
-      borderColor: "#DD4D42",
-      transition: {
-        ease: [0.77, 0, 0.175, 1],
-      },
-    },
-    contact: {
-      opacity: 1,
-      backgroundColor: "#FFBCBC",
-      color: "#000",
-      height: "5vw",
-      width: "5vw",
-      borderColor: "#FFBCBC",
-      fontSize: "32px",
-    },
-    click: {
-      opacity: 1,
-      height: "5vw",
-      width: "5vw",
-      color: "#231F20",
-      fontSize: "18px",
-      backgroundColor: "#DD4D42",
-      borderColor: "#DD4D42",
-    },
-    mail: {
-      opacity: 1,
-      backgroundColor: "#69365A",
-      color: "#000",
-      height: "5vw",
-      width: "5vw",
-      borderColor: "#69365A",
-      fontSize: "32px",
-    },
-    take: {
-      opacity: 1,
-      height: "6vw",
-      width: "6vw",
-      fontSize: "18px",
-      backgroundColor: "#DD4D42",
-      borderColor: "#DD4D42",
-    },
-    gif: {
-      opacity: 1,
-      height: "10vw",
-      backgroundColor: "none",
-      borderColor: "transparent",
-
-      width: "10vw",
-    },
-  };
-
-  const cursorTextVariants = {
-    intro: {},
-  };
 
   const spring = {
     type: "spring",
@@ -154,7 +44,13 @@ const CustomCursor = () => {
       >
         <span className="cursorText">{cursorText}</span>
         {gif && (
-          <Image src={gif} className="cursorImage" height="300" width="300" />
+          <Image
+            src={gif}
+            className="cursorImage"
+            alt="hellothere"
+            height="300"
+            width="300"
+          />
         )}
       </motion.div>
     </>

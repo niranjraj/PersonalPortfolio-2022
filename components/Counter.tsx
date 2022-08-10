@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+
 import { CircularProgressbar } from "react-circular-progressbar";
 import ProgressProvider from "./ProgressProvider";
 import "react-circular-progressbar/dist/styles.css";

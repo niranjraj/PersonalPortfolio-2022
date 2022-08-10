@@ -12,7 +12,6 @@
     border-radius: 50%;
     background: transparent;
     border: 2px solid var(--cursor-default);
-    border-radius: 200px;
     pointer-events: none;
     color: #fff;
     text-align: center;
@@ -31,4 +30,10 @@
 
 .cursorImage {
     border-radius: 50%;
+}
+
+.c-scrollbar_thumb {
+    background-color: #DD4D42!important;
+    width: 5px!important;
+    border-radius: 0!important;
 }
