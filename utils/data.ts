@@ -43,7 +43,7 @@ export type Hobby = {
   
   export const projectItems: projectItem[] = [
     {
-      image: "/static/invoicelyPhone.png",
+      image: "/static/Invoicely.png",
       title: "Invoicely",
       subtitle: "a professional web app for Invoices",
       type: "logic, implementation, webapp, ux",
