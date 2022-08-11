@@ -1,16 +1,16 @@
 @font-face {
     font-family: "WorkSans";
-    src: url("/fonts/WorkSans/WorkSans-Regular.woff2");
+    src: url("/fonts/WorkSans/WorkSans-Regular.woff2")format("woff2");
 }
 
 @font-face {
     font-family: "WorkSansBold";
-    src: url("/fonts/WorkSans/WorkSans-Bold.woff2");
+    src: url("/fonts/WorkSans/WorkSans-Bold.woff2")format("woff2");
 }
 
 @font-face {
     font-family: "WorkSansSemiBold";
-    src: url("/fonts/WorkSans/WorkSans-SemiBold.woff2");
+    src: url("/fonts/WorkSans/WorkSans-SemiBold.woff2")format("woff2");
 }
 
 @font-face {
@@ -20,7 +20,7 @@
 
 @font-face {
     font-family: "WorkSansLight";
-    src: url("/fonts/WorkSans/WorkSans-Light.woff");
+    src: url("/fonts/WorkSans/WorkSans-Light.woff")format("woff");
 }
 
 @font-face {

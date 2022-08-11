@@ -102,7 +102,7 @@ const Home: NextPage = () => {
             href="/favicon-16x16.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
-          {/* <link
+          <link
             rel="preload"
             href="/fonts/IvyMode/IvyMode-Regular.ttf"
             as="font"
@@ -115,7 +115,7 @@ const Home: NextPage = () => {
             as="font"
             type="font/woff2"
             crossOrigin=""
-          /> */}
+          />
           <title>NiranjRaj - 2022</title>
         </Head>
         <ScrollTriggerProxy />
