@@ -67,23 +67,32 @@ const Home: NextPage = () => {
           />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="NiranjRaj - 2022" />
+          <meta property="og:site_name" content="NiranjRaj - 2022" />
+          <meta property="og:url" content="https://www.niranjraj.me" />
           <meta
             property="og:description"
             content="A passionate creative frontend developer.I love to create new and
               awesome features, Optimized to perform across all devices and
               provide a solid experience."
           />
-          <meta property="og:image" content="/static/Logo.png" />
+          <meta
+            property="og:image"
+            content="https://www.niranjraj.me/static/Logo.png"
+          />
 
           <meta property="twitter:title" content="NiranjRaj - 2022" />
           <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://www.niranjraj.me" />
           <meta
             property="twitter:description"
             content="A passionate creative frontend developer.I love to create new and
               awesome features, Optimized to perform across all devices and
               provide a solid experience"
           />
-          <meta property="twitter:image" content="/static/Logo.png" />
+          <meta
+            property="twitter:image"
+            content="https://www.niranjraj.me/static/Logo.png"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -107,14 +116,14 @@ const Home: NextPage = () => {
             href="/fonts/IvyMode/IvyMode-Regular.ttf"
             as="font"
             type="font/ttf"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
           <link
             rel="preload"
             href="/fonts/WorkSans/WorkSans-Regular.woff2"
             as="font"
             type="font/woff2"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
           <title>NiranjRaj - 2022</title>
         </Head>
