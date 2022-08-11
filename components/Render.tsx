@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { setCursorText, setCursorVariant } from "../redux/cursor-slice";
 import { useAppSelector, useAppDispatch } from "../redux/redux-hooks";
 import { appear } from "../utils/variants";
+import { useMediaQuery } from "react-responsive";
 import {
   OrbitControls,
   TrackballControls,
@@ -35,24 +36,9 @@ type Props = {
 const Render = (props: Props) => {
   const angleToRadians = (angle: number) => (Math.PI / 180) * angle;
   const dispatch = useAppDispatch();
-  const [windowSize, setWindowSize] = useState<number | null>(null);
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+
   const controls = useAnimation();
-
-  useEffect(() => {
-    // only execute all the code below in client side
-    if (typeof window !== "undefined") {
-      // Handler to call on window resize
-      const handleResize = () => {
-        setWindowSize(window.innerWidth);
-      };
-
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-      handleResize();
-
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
 
   useEffect(() => {
     controls.set({ opacity: 0, y: 100 });
@@ -103,34 +89,12 @@ const Render = (props: Props) => {
           <pointLight position={[50, 5, 2]} intensity={1} />
           <Suspense fallback={null}>
             {props.hobby.state === 0 ? (
-              <Football
-                scale={
-                  windowSize
-                    ? windowSize <= 1024 && windowSize > 480
-                      ? 0.15
-                      : 0.1
-                    : 0.1
-                }
-              />
+              <Football scale={isTabletOrMobile ? 0.15 : 0.1} />
             ) : props.hobby.state === 1 ? (
-              <Controller
-                scale={
-                  windowSize
-                    ? windowSize <= 1024 && windowSize > 480
-                      ? 3
-                      : 2.4
-                    : 2.4
-                }
-              />
+              <Controller scale={isTabletOrMobile ? 3 : 2.4} />
             ) : (
               <Headphone
-                scale={
-                  windowSize
-                    ? windowSize <= 1024 && windowSize > 480
-                      ? 0.5
-                      : 0.4
-                    : 0.4
-                }
+                scale={isTabletOrMobile ? 0.5 : 0.4}
                 position={[0, -4, 0]}
               />
             )}

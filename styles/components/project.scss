@@ -210,6 +210,9 @@
     @include tablet-landscape-and-below {
         font-size: 2rem;
     }
+    @include mobile-landscape-and-below {
+        font-size: 1.8rem;
+    }
 }
 
 .project-type {
@@ -218,4 +221,7 @@
     position: absolute;
     left: 12%;
     padding-top: 0.25em;
+    @include mobile-landscape-and-below {
+        font-size: 1rem;
+    }
 }

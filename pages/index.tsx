@@ -20,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Home: NextPage = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   console.log("Welcome to Niranj's Portfolio");
+
   return (
     <LocomotiveScrollProvider
       options={{
@@ -27,13 +28,16 @@ const Home: NextPage = () => {
         lerp: 0.05,
         multiplier: 2,
         firefoxMultiplier: 2,
-        touchMultiplier: 0.1,
+
         smartPhone: {
           smooth: true,
+          breakpoint: 0,
+          touchMultiplier: 2,
         },
         tablet: {
-          inertia: 0.8,
           smooth: true,
+          breakpoint: 0,
+          touchMultiplier: 2,
         },
       }}
       watch={[]}

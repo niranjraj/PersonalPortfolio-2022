@@ -18,6 +18,8 @@
         --theme-text: #231F20;
         --theme-secondary: #E5D8C7;
         --cursor-default: #DD4D42;
+        --render-button-sel: #1d1813;
+        --render-button: #231F20;
     }
     
      :root.dark {
@@ -25,6 +27,8 @@
         --theme-text: #E0D8CD;
         --theme-secondary: #E5D8C7;
         --cursor-default: #DD4D42;
+        --render-button-sel: #ebd2b1;
+        --render-button: #b4ada2
     }
     
     html,
@@ -32,6 +36,9 @@
         &,
         * {
             cursor: none;
+            @include tablet-landscape-and-below {
+                cursor: default;
+            }
         }
     }
     
@@ -46,9 +53,6 @@
         /* IE 10 and IE 11 */
         user-select: none;
         transition: 0.3s ease-out;
-        @include tablet-landscape-and-below {
-            pointer-events: none;
-        }
     }
     
     *,

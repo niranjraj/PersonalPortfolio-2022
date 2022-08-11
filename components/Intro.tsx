@@ -193,7 +193,12 @@ const Intro = () => {
               initial="initial"
               onMouseEnter={hobby.state !== 0 ? buttonEnter : leave}
               onMouseLeave={leave}
-              style={{ color: hobby.state === 0 ? "#ebd2b1" : "#b4ada2" }}
+              style={{
+                color:
+                  hobby.state === 0
+                    ? "var( --render-button-sel)"
+                    : "var( --render-button)",
+              }}
               onClick={() => {
                 setHobby(myHobby[0]);
               }}
@@ -207,7 +212,12 @@ const Intro = () => {
               onMouseLeave={leave}
               viewport={{ once: true }}
               initial="initial"
-              style={{ color: hobby.state === 1 ? "#ebd2b1" : "#b4ada2" }}
+              style={{
+                color:
+                  hobby.state === 1
+                    ? "var( --render-button-sel)"
+                    : "var( --render-button)",
+              }}
               onClick={() => {
                 setHobby(myHobby[1]);
               }}
@@ -221,7 +231,12 @@ const Intro = () => {
               onMouseLeave={leave}
               viewport={{ once: true }}
               initial="initial"
-              style={{ color: hobby.state === 2 ? "#ebd2b1" : "#b4ada2" }}
+              style={{
+                color:
+                  hobby.state === 2
+                    ? "var( --render-button-sel)"
+                    : "var( --render-button)",
+              }}
               onClick={() => {
                 setHobby(myHobby[2]);
               }}

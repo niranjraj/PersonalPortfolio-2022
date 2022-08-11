@@ -6,7 +6,7 @@ type Props = {
 };
 const Loader = (props: Props) => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
-  const subtitleRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     let id: NodeJS.Timer;
     let initial = 1999;
