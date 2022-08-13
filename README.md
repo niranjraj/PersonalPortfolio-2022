@@ -1,5 +1,5 @@
 ### Personal website with  Next js
 
-##Todo
+## Todo
 * Spotify Integration
 * Multipage transition
