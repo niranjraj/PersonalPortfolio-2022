@@ -1,39 +1,43 @@
 .circle {
-    position: fixed;
-    z-index: 100;
-    display: flex;
-    flex-flow: row;
-    align-content: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background: transparent;
-    border: 2px solid var(--cursor-default);
-    pointer-events: none;
-    color: #fff;
-    text-align: center;
-    font-family: workSans;
-    letter-spacing: 1px;
-    font-size: 16px;
-    transition: opacity 0.3s ease-in-out, transform 0.1s ease;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  flex-flow: row;
+  align-content: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid var(--cursor-default);
+  pointer-events: none;
+  color: #fff;
+  text-align: center;
+  font-family: workSans;
+  letter-spacing: 1px;
+  font-size: 16px;
+  transition: opacity 0.3s ease-in-out, transform 0.1s ease;
+  opacity: 0;
 }
 
+body:hover .circle {
+  opacity: 1 !important;
+}
 .cursorText {
-    flex: auto;
-    font-size: inherit;
-    pointer-events: none;
-    margin: auto;
+  flex: auto;
+  font-size: inherit;
+  pointer-events: none;
+  margin: auto;
 }
 
 .cursorImage {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .c-scrollbar_thumb {
-    background-color: #DD4D42!important;
-    width: 5px!important;
-    border-radius: 0!important;
+  background-color: #dd4d42 !important;
+  width: 5px !important;
+  border-radius: 0 !important;
 }
