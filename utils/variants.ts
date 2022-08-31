@@ -52,7 +52,6 @@ export const appearRender = {
 
 export const variants = {
   default: {
-    opacity: 1,
     height: 50,
     width: 50,
     fontSize: "16px",
