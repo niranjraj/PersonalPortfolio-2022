@@ -1,17 +1,17 @@
-import React, { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import SvgComponent from "./SvgComponent";
 
 import Language from "./Language";
 import Render from "./Render";
 
-import SkillItem from "./SkillItem";
 import { motion } from "framer-motion";
 import { setCursorText, setCursorVariant, setGif } from "../redux/cursor-slice";
-import { useAppDispatch, useAppSelector } from "../redux/redux-hooks";
+import { useAppDispatch } from "../redux/redux-hooks";
+import SkillItem from "./SkillItem";
 
 import { Hobby, myHobby } from "../utils/data";
-import { banner, appear, letterAni } from "../utils/variants";
+import { appear, banner, letterAni } from "../utils/variants";
 
 const Intro = () => {
   const [hobby, setHobby] = useState<Hobby>(myHobby[0]);
@@ -112,7 +112,7 @@ const Intro = () => {
             <Image
               onMouseEnter={IntroHover}
               onMouseLeave={IntroLeave}
-              src="/static/headshot.png"
+              src="/static/BeachFront.jpeg"
               className="intro-img-content"
               layout="fill"
               alt="portrait"
