@@ -28,27 +28,20 @@ const Greeter = () => {
     >
       <ul className="nav-title">
         <motion.li variants={appear} animate="animate" initial="initial">
-          <Link href="#project">
-            <a
-              href="#project"
-              data-scroll-to
-              onMouseEnter={projectEnter}
-              onMouseLeave={leave}
-            >
-              Project.
-            </a>
+          <Link href="#project"
+            scroll={false} 
+            onMouseEnter={projectEnter}
+            onMouseLeave={leave}
+            data-scroll-to>
+            Project.
           </Link>
         </motion.li>
         <motion.li variants={appear} animate="animate" initial="initial">
-          <Link href="#about">
-            <a
-              href="#about"
+          <Link href="#about"
               data-scroll-to
               onMouseEnter={projectEnter}
-              onMouseLeave={leave}
-            >
+              onMouseLeave={leave}>
               About.
-            </a>
           </Link>
         </motion.li>
 
@@ -58,15 +51,10 @@ const Greeter = () => {
           animate="animate"
           initial="initial"
         >
-          <Link href="#contact">
-            <a
-              href="#contact"
-              data-scroll-to
+          <Link href="#contact"    data-scroll-to
               onMouseEnter={projectEnter}
-              onMouseLeave={leave}
-            >
+              onMouseLeave={leave}>
               Contact.
-            </a>
           </Link>
         </motion.li>
       </ul>

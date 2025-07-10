@@ -12,16 +12,9 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 
-const Football = dynamic(() => import("./Football"), {
-  suspense: true,
-});
-const Controller = dynamic(() => import("./Controller"), {
-  suspense: true,
-});
-
-const Headphone = dynamic(() => import("./Headphone"), {
-  suspense: true,
-});
+const Football = dynamic(() => import("./Football")); 
+const Controller = dynamic(() => import("./Controller"));
+const Headphone = dynamic(() => import("./Headphone"));
 
 type Hobby = {
   state: number;
@@ -85,7 +78,7 @@ const Render = (props: Props) => {
             maxPolarAngle={angleToRadians(60)}
           />
 
-          <ambientLight intensity={0.7} />
+          <ambientLight intensity={2} />
           <pointLight position={[50, 5, 2]} intensity={1} />
           <Suspense fallback={null}>
             {props.hobby.state === 0 ? (

@@ -75,12 +75,9 @@ const Project = () => {
                   viewport={{ once: true, amount: 0.5 }}
                   className="hide-container"
                 ></motion.div>
-                <Link href={project.link}>
-                  <a
-                    className="project-item-container"
+                <Link href={project.link} className="project-item-container"
                     onMouseOver={projectEnter}
-                    onMouseOut={leave}
-                  >
+                    onMouseOut={leave}>
                     <div className="project-item-img-wrapper">
                       <div className={`item-img item-img${index}`}>
                         <Image
@@ -90,12 +87,11 @@ const Project = () => {
                           data-scroll-offset="10"
                           alt={project.title}
                           src={project.image}
-                          height={project.height}
-                          width={project.width}
+                          height={Number(project.height)}  
+                          width={Number(project.width)}  
                         />
                       </div>
                     </div>
-                  </a>
                 </Link>
 
                 <div className="project-title-wrapper">

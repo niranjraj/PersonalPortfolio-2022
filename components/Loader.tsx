@@ -8,7 +8,7 @@ const Loader = (props: Props) => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    let id: NodeJS.Timer;
+    let id: ReturnType<typeof setInterval>;
     let initial = 1999;
     const currentLoad = loaderRef.current as HTMLDivElement;
     const year = new Date().getFullYear();

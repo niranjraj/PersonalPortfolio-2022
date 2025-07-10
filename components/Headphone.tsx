@@ -10,8 +10,7 @@ import * as THREE from "three";
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { motion } from "framer-motion-3d";
-import { appearRender } from "../utils/variants";
+import { useSpring, animated } from "@react-spring/three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -47,10 +46,32 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/headphone.glb") as GLTFResult;
+export default function Model(props: React.ComponentProps<"group">) {
+  const { nodes, materials } = useGLTF("/headphone.glb") as unknown as GLTFResult;
+  
+
+  const springs = useSpring({
+    from: { 
+      scale: 0, 
+      opacity: 0,
+      positionY: -2
+    },
+    to: { 
+      scale: 1, 
+      opacity: 1,
+      positionY: 0
+    },
+    config: { 
+      tension: 280, 
+      friction: 60
+    }
+  });
+
   return (
-    <motion.group variants={appearRender} initial="initial" animate="animate">
+    <animated.group 
+      scale={springs.scale}
+      position-y={springs.positionY}
+    >
       <group {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
@@ -63,26 +84,30 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
                 position={[-0.06, 0.05, -0.01]}
                 rotation={[-3.09, -1.52, 1.84]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["8_EarCab001_earCab_0"].geometry}
                   material={materials.earCab}
+                  material-opacity={springs.opacity}
                 />
-                <mesh
+                <animated.mesh
                   geometry={nodes["8_EarCab001_earCabFabric_0"].geometry}
                   material={materials.earCabFabric}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.08, 0.04, 0.01]}
                 rotation={[-3.09, -1.52, 1.84]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["7_EarCover001_Headphone_Default_0"].geometry}
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
-                <mesh
+                <animated.mesh
                   geometry={nodes["7_EarCover001_MetalRing_0"].geometry}
                   material={materials.MetalRing}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
@@ -90,11 +115,12 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
                 rotation={[-Math.PI, -1.52, 1.57]}
                 scale={1.29}
               >
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["6_EarCoverHole001_Headphone_Default_0"].geometry
                   }
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
@@ -102,107 +128,120 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
                 rotation={[0, -0.48, -Math.PI / 2]}
                 scale={[1, 0.75, 1]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["4_EarCoverConnector001__0"].geometry}
                   material={materials["4_EarCoverConnector.001__0"]}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.08, 0.03, -0.01]}
                 rotation={[Math.PI / 2, 0, -1.09]}
               >
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["5_EarCoverConnectorHolder001_Headphone_Default_0"]
                       .geometry
                   }
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.1, 0.05, 0.04]}
                 rotation={[Math.PI / 2, 0, -1.35]}
               >
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["2_X_Connector_Bottom001_Headphone_Default_0"]
                       .geometry
                   }
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["2_X_Connector_Bottom001_MetalRing_0"].geometry
                   }
                   material={materials.MetalRing}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.09, 0.05, 0.02]}
                 rotation={[0, -0.38, -Math.PI / 2]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["3_Logo001_Headphone_Default_0"].geometry}
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.1, 0.05, 0.05]}
                 rotation={[0, -0.22, -Math.PI / 2]}
               >
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["2_X_Connector_Top001_Headphone_Default_0"].geometry
                   }
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group position={[-0.02, 0.05, 0.08]}>
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["01_MetalBar001_HeadbarMetalclean_0"].geometry
                   }
                   material={materials["HeadbarMetal.clean"]}
+                  material-opacity={springs.opacity}
                 />
-                <mesh
+                <animated.mesh
                   geometry={nodes["01_MetalBar001_HeadbarMetal_0"].geometry}
                   material={materials.HeadbarMetal}
+                  material-opacity={springs.opacity}
                 />
-                <mesh
+                <animated.mesh
                   geometry={
                     nodes["01_MetalBar001_Headphone_Default_0"].geometry
                   }
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group position={[-0.02, 0.05, 0.08]} scale={[1, 1.87, 1]}>
-                <mesh
+                <animated.mesh
                   geometry={nodes["02_FabricBar001_earCab_0"].geometry}
                   material={materials.earCab}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group position={[-0.1, 0.05, 0.11]} rotation={[0, 0.35, 0]}>
-                <mesh
+                <animated.mesh
                   geometry={nodes["02_BarEnd001_Headphone_Default_0"].geometry}
                   material={materials.Headphone_Default}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.1, 0.04, 0.11]}
                 rotation={[3.13, 1.21, -1.56]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["02_Screws003_Screw_0"].geometry}
                   material={materials.Screw}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
                 position={[-0.1, 0.06, 0.11]}
                 rotation={[3.13, 1.21, -1.56]}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["02_Screws004_Screw_0"].geometry}
                   material={materials.Screw}
+                  material-opacity={springs.opacity}
                 />
               </group>
               <group
@@ -210,16 +249,17 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
                 rotation={[0.18, 1.56, 1.39]}
                 scale={0.59}
               >
-                <mesh
+                <animated.mesh
                   geometry={nodes["02_Screws005_Screw_0"].geometry}
                   material={materials.Screw}
+                  material-opacity={springs.opacity}
                 />
               </group>
             </group>
           </group>
         </group>
       </group>
-    </motion.group>
+    </animated.group>
   );
 }
 

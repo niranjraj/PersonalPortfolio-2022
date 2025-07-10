@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Variants} from "framer-motion";
+
 
 type Props = {
   title: string;
 };
 
-const letterAni = {
+const letterAni:Variants = {
   initial: {
     y: 400,
   },

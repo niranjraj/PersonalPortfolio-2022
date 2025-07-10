@@ -5,14 +5,11 @@ license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 source: https://sketchfab.com/3d-models/low-poly-cartoon-football-ball-free-259ba8af81484d19861fd5d70e9f5fcc
 title: Low Poly Cartoon Football Ball Free
 */
-
 import * as THREE from "three";
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-
-import { motion } from "framer-motion-3d";
-import { appearRender } from "../utils/variants";
+import { useSpring, animated } from "@react-spring/three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -25,28 +22,51 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/football.gltf") as GLTFResult;
+export default function Model(props: React.ComponentProps<"group">) {
+  const { nodes, materials } = useGLTF("/football.gltf") as unknown as GLTFResult;
+  
+
+  const springs = useSpring({
+    from: { 
+      scale: 0, 
+      opacity: 0,
+      positionY: -2
+    },
+    to: { 
+      scale: 1, 
+      opacity: 1,
+      positionY: 0
+    },
+    config: { 
+      tension: 280, 
+      friction: 60
+    }
+  });
 
   return (
-    <motion.group variants={appearRender} initial="initial" animate="animate">
+    <animated.group 
+      scale={springs.scale}
+      position-y={springs.positionY}
+    >
       <group {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
             <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-              <mesh
+              <animated.mesh
                 geometry={nodes.FootballBall_White_0.geometry}
                 material={materials.White}
+                material-opacity={springs.opacity}
               />
-              <mesh
+              <animated.mesh
                 geometry={nodes.FootballBall_Black_0.geometry}
                 material={materials.Black}
+                material-opacity={springs.opacity}
               />
             </group>
           </group>
         </group>
       </group>
-    </motion.group>
+    </animated.group>
   );
 }
 

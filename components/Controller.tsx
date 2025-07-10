@@ -10,8 +10,7 @@ import * as THREE from "three";
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { motion } from "framer-motion-3d";
-import { appearRender } from "../utils/variants";
+import { useSpring, animated } from "@react-spring/three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,55 +35,86 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Controller(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/controller.glb") as GLTFResult;
+export default function Controller(props: React.ComponentProps<"group">) {
+  const { nodes, materials } = useGLTF("/controller.glb") as unknown as GLTFResult;
+  
+  const springs = useSpring({
+    from: { 
+      scale: 0, 
+      opacity: 0,
+      positionY: -2
+    },
+    to: { 
+      scale: 1, 
+      opacity: 1,
+      positionY: 0
+    },
+    config: { 
+      tension: 280, 
+      friction: 60
+    }
+  });
+
   return (
-    <motion.group variants={appearRender} initial="initial" animate="animate">
+    <animated.group 
+      scale={springs.scale}
+      position-y={springs.positionY}
+    >
       <group {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_2.geometry}
             material={materials.aiStandardSurface1SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_3.geometry}
             material={materials.aiStandardSurface11SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_4.geometry}
             material={materials.aiStandardSurface11SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_5.geometry}
             material={materials.aiStandardSurface13SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_6.geometry}
             material={materials.aiStandardSurface13SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_7.geometry}
             material={materials.aiStandardSurface14SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_8.geometry}
             material={materials.aiStandardSurface4SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_9.geometry}
             material={materials.aiStandardSurface4SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_10.geometry}
             material={materials.aiStandardSurface4SG}
+            material-opacity={springs.opacity}
           />
-          <mesh
+          <animated.mesh
             geometry={nodes.Object_11.geometry}
             material={materials.aiStandardSurface6SG}
+            material-opacity={springs.opacity}
           />
         </group>
       </group>
-    </motion.group>
+    </animated.group>
   );
 }
 

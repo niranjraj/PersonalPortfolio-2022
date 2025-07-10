@@ -77,30 +77,39 @@ const Contact = () => {
               className="social-list"
             >
               <li className="row-letter-ani">
-                <Link href="https://github.com/niranjraj">
-                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
-                    <motion.span className="letter-ani" variants={letterAni}>
-                      Github
-                    </motion.span>
-                  </a>
+                <Link
+                  href="https://github.com/niranjraj"
+                  onMouseEnter={buttonEnter}
+                  onMouseLeave={leave}>
+
+                  <motion.span className="letter-ani" variants={letterAni}>
+                    Github
+                  </motion.span>
+
                 </Link>
               </li>
               <li className="row-letter-ani">
-                <Link href="https://www.linkedin.com/in/niranjRaj">
-                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
-                    <motion.span className="letter-ani" variants={letterAni}>
-                      LinkedIn
-                    </motion.span>
-                  </a>
+                <Link
+                  href="https://www.linkedin.com/in/niranjRaj"
+                  onMouseEnter={buttonEnter}
+                  onMouseLeave={leave}>
+
+                  <motion.span className="letter-ani" variants={letterAni}>
+                    LinkedIn
+                  </motion.span>
+
                 </Link>
               </li>
               <li className="row-letter-ani">
-                <Link href="https://www.instagram.com/niranj.tsx/?hl=en">
-                  <a onMouseEnter={buttonEnter} onMouseLeave={leave}>
-                    <motion.span className="letter-ani" variants={letterAni}>
-                      Instagram
-                    </motion.span>
-                  </a>
+                <Link
+                  href="https://www.instagram.com/niranj.tsx/?hl=en"
+                  onMouseEnter={buttonEnter}
+                  onMouseLeave={leave}>
+
+                  <motion.span className="letter-ani" variants={letterAni}>
+                    Instagram
+                  </motion.span>
+
                 </Link>
               </li>
             </motion.ul>
@@ -121,17 +130,17 @@ const Contact = () => {
             </motion.p>
 
             <div>
-              <Link href={`mailto:${mailInfo.id}?subject=${mailInfo.subject}`}>
-                <a
-                  className="btn-connect"
-                  onMouseEnter={emailEnter}
-                  onMouseLeave={leave}
-                >
-                  <span>Connect</span>
-                  <span>
-                    <SvgComponent width={40} height={40} />
-                  </span>
-                </a>
+              <Link
+                href={`mailto:${mailInfo.id}?subject=${mailInfo.subject}`}
+                className="btn-connect"
+                onMouseEnter={emailEnter}
+                onMouseLeave={leave}>
+
+                <span>Connect</span>
+                <span>
+                  <SvgComponent width={40} height={40} />
+                </span>
+
               </Link>
             </div>
             <div className="credit">
